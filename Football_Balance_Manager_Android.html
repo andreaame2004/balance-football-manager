@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Football Balance Manager</title>
+<style>
+:root{
+  --bg:#08111f; --panel:#0f172a; --panel2:#111c33; --text:#eef4ff; --muted:#93a4bf;
+  --border:#22314f; --accent:#3b82f6; --accent2:#22c55e; --danger:#ef4444; --warn:#f59e0b;
+  --shadow:0 10px 30px rgba(0,0,0,.25)
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:linear-gradient(180deg,#08111f,#0b1323 45%,#08111f);color:var(--text);font-family:Inter,Arial,sans-serif}
+body{min-height:100vh}
+.app{max-width:980px;margin:auto;padding:18px 14px 90px}
+.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand h1{font-size:24px;margin:0}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.badge{font-size:12px;padding:7px 10px;border-radius:999px;background:#13213b;color:#bcd0f7;border:1px solid var(--border)}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;position:sticky;top:0;z-index:10;background:rgba(8,17,31,.94);backdrop-filter:blur(10px);padding:8px 0 12px}
+.tab{border:1px solid var(--border);background:var(--panel);color:var(--muted);padding:10px 8px;border-radius:10px;font-size:12px;font-weight:700}
+.tab.active{background:var(--accent);color:white;border-color:transparent}
+.section{display:none}
+.section.active{display:block}
+.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:16px;padding:15px;box-shadow:var(--shadow);margin-bottom:14px}
+.card h2{font-size:17px;margin:0 0 12px}
+.card h3{font-size:14px;color:#c9d8ef;margin:10px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+label{font-size:12px;color:var(--muted)}
+input,select{width:100%;background:#08111f;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:11px 12px;font-size:14px}
+button{cursor:pointer}
+.btn{border:0;border-radius:10px;padding:11px 13px;font-weight:800}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.good{background:var(--accent2);color:#04110a}
+.btn.danger{background:#3b1620;color:#ffb4bf;border:1px solid #6d2432}
+.btn.ghost{background:#121c30;color:#c7d6ed;border:1px solid var(--border)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.kpi{background:#0b1425;border:1px solid var(--border);border-radius:14px;padding:14px}
+.kpi small{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}
+.kpi strong{font-size:20px}
+.goodtxt{color:#4ade80}.badtxt{color:#fb7185}.warntxt{color:#fbbf24}
+.player{border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px;background:#0a1426}
+.playerhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.playername{font-weight:800}
+.meta{font-size:12px;color:var(--muted);margin-top:4px}
+.playergrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.stat{background:#101b30;border-radius:10px;padding:9px}
+.stat small{display:block;color:var(--muted);font-size:10px}.stat b{font-size:13px}
+hr{border:0;border-top:1px solid var(--border);margin:14px 0}
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:700px}
+th,td{padding:10px;border-bottom:1px solid var(--border);font-size:12px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:20px}
+.footerbar{position:fixed;bottom:0;left:0;right:0;background:rgba(8,17,31,.96);border-top:1px solid var(--border);padding:10px 14px;backdrop-filter:blur(10px)}
+.footerinner{max-width:980px;margin:auto;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.saved{font-size:12px;color:var(--muted)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;background:#111827;color:white;padding:10px 14px;border-radius:10px;border:1px solid var(--border);display:none;z-index:99}
+@media(max-width:700px){
+ .tabs{grid-template-columns:repeat(5,1fr)}
+ .tab{font-size:10px;padding:9px 4px}
+ .grid2{grid-template-columns:1fr}
+ .kpis{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <h1>Football Balance Manager</h1>
+      <p>Bilancio, rosa e calciomercato</p>
+    </div>
+    <div class="badge" id="seasonBadge">2026/27</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="dashboard">Bilancio</button>
+    <button class="tab" data-tab="revenues">Ricavi</button>
+    <button class="tab" data-tab="costs">Costi</button>
+    <button class="tab" data-tab="squad">Rosa</button>
+    <button class="tab" data-tab="market">Mercato</button>
+  </div>
+
+  <section id="dashboard" class="section active">
+    <div class="card">
+      <h2>Squadra e stagione</h2>
+      <div class="grid2">
+        <div class="field"><label>Nome squadra</label><input id="clubName" placeholder="Es. AS Roma"></div>
+        <div class="field"><label>Stagione</label><input id="season" placeholder="2026/27"></div>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><small>Ricavi totali</small><strong id="kpiRevenue">€0</strong></div>
+      <div class="kpi"><small>Costi totali</small><strong id="kpiCosts">€0</strong></div>
+      <div class="kpi"><small>Risultato mercato</small><strong id="kpiMarket">€0</strong></div>
+      <div class="kpi"><small>Utile / perdita</small><strong id="kpiNet">€0</strong></div>
+      <div class="kpi"><small>Costo stipendi rosa</small><strong id="kpiWages">€0</strong></div>
+      <div class="kpi"><small>Ammortamenti rosa</small><strong id="kpiAmort">€0</strong></div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h2>Conto economico sintetico</h2>
+      <div class="tablewrap">
+        <table>
+          <tbody id="incomeTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="revenues" class="section">
+    <div class="card">
+      <h2>Ricavi annuali</h2>
+      <div class="field"><label>Diritti TV</label><input class="moneyinput" id="tv" type="number"></div>
+      <div class="field"><label>Sponsor e commerciale</label><input class="moneyinput" id="sponsor" type="number"></div>
+      <div class="field"><label>Biglietteria e matchday</label><input class="moneyinput" id="stadium" type="number"></div>
+      <div class="field"><label>Premi UEFA / coppe</label><input class="moneyinput" id="uefa" type="number"></div>
+      <div class="field"><label>Merchandising</label><input class="moneyinput" id="merch" type="number"></div>
+      <div class="field"><label>Altri ricavi</label><input class="moneyinput" id="otherRev" type="number"></div>
+    </div>
+  </section>
+
+  <section id="costs" class="section">
+    <div class="card">
+      <h2>Costi annuali</h2>
+      <div class="field"><label>Staff tecnico e dipendenti</label><input class="moneyinput" id="staff" type="number"></div>
+      <div class="field"><label>Gestione stadio / centro sportivo</label><input class="moneyinput" id="facilities" type="number"></div>
+      <div class="field"><label>Commissioni agenti</label><input class="moneyinput" id="agents" type="number"></div>
+      <div class="field"><label>Costi amministrativi</label><input class="moneyinput" id="admin" type="number"></div>
+      <div class="field"><label>Altri costi operativi</label><input class="moneyinput" id="otherCosts" type="number"></div>
+      <div class="field"><label>Interessi / oneri finanziari</label><input class="moneyinput" id="interest" type="number"></div>
+    </div>
+  </section>
+
+  <section id="squad" class="section">
+    <div class="card">
+      <h2>Aggiungi giocatore alla rosa</h2>
+      <div class="grid2">
+        <div class="field"><label>Nome</label><input id="pName"></div>
+        <div class="field"><label>Ruolo</label>
+          <select id="pRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select>
+        </div>
+        <div class="field"><label>Costo cartellino</label><input id="pCost" type="number"></div>
+        <div class="field"><label>Durata contratto (anni)</label><input id="pYears" type="number" value="5"></div>
+        <div class="field"><label>Anni già ammortizzati</label><input id="pAmortYears" type="number" value="0"></div>
+        <div class="field"><label>Stipendio lordo annuo</label><input id="pWage" type="number"></div>
+      </div>
+      <button class="btn primary" onclick="addPlayer()">Aggiungi alla rosa</button>
+    </div>
+    <div class="card">
+      <h2>Rosa</h2>
+      <div id="squadList"></div>
+    </div>
+  </section>
+
+  <section id="market" class="section">
+    <div class="card">
+      <h2>Cessione giocatore</h2>
+      <div class="field"><label>Giocatore</label><select id="salePlayer"></select></div>
+      <div class="field"><label>Prezzo di vendita</label><input id="salePrice" type="number"></div>
+      <button class="btn good" onclick="sellPlayer()">Registra cessione</button>
+    </div>
+    <div class="card">
+      <h2>Operazioni di mercato</h2>
+      <div id="marketList"></div>
+    </div>
+  </section>
+</div>
+
+<div class="footerbar">
+  <div class="footerinner">
+    <div class="saved" id="saveState">Salvataggio automatico attivo</div>
+    <div class="btnrow">
+      <button class="btn ghost" onclick="exportData()">Esporta</button>
+      <button class="btn danger" onclick="resetAll()">Azzera</button>
+    </div>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='football_balance_manager_v2';
+const defaultState={
+ clubName:'', season:'2026/27',
+ revenues:{tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0},
+ costs:{staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0},
+ squad:[], market:[]
+};
+let state=load();
+
+function euro(v){
+ return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Number(v)||0);
+}
+function load(){
+ try{return {...defaultState,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){return structuredClone(defaultState)}
+}
+function save(){
+ localStorage.setItem(KEY,JSON.stringify(state));
+ document.getElementById('saveState').textContent='Salvato sul telefono';
+ setTimeout(()=>document.getElementById('saveState').textContent='Salvataggio automatico attivo',1000);
+}
+function toast(t){
+ const el=document.getElementById('toast'); el.textContent=t; el.style.display='block';
+ setTimeout(()=>el.style.display='none',1800);
+}
+function bind(){
+ clubName.value=state.clubName; season.value=state.season;
+ for(const k in state.revenues) document.getElementById(k).value=state.revenues[k];
+ for(const k in state.costs) document.getElementById(k).value=state.costs[k];
+
+ clubName.addEventListener('input',()=>{state.clubName=clubName.value; save(); render()});
+ season.addEventListener('input',()=>{state.season=season.value; save(); render()});
+ Object.keys(state.revenues).forEach(k=>document.getElementById(k).addEventListener('input',e=>{state.revenues[k]=Number(e.target.value)||0;save();render()}));
+ Object.keys(state.costs).forEach(k=>document.getElementById(k).addEventListener('input',e=>{state.costs[k]=Number(e.target.value)||0;save();render()}));
+
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+   document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+   b.classList.add('active'); document.getElementById(b.dataset.tab).classList.add('active');
+ });
+}
+function addPlayer(){
+ const name=pName.value.trim();
+ if(!name){toast('Inserisci il nome');return}
+ const years=Math.max(1,Number(pYears.value)||1);
+ const cost=Number(pCost.value)||0;
+ const amortYears=Math.max(0,Number(pAmortYears.value)||0);
+ state.squad.push({
+   id:Date.now(),name,role:pRole.value,cost,years,amortYears,
+   wage:Number(pWage.value)||0
+ });
+ pName.value=''; pCost.value=''; pWage.value=''; pAmortYears.value='0';
+ save();render();toast('Giocatore aggiunto');
+}
+function removePlayer(id){
+ state.squad=state.squad.filter(p=>p.id!==id); save();render();
+}
+function sellPlayer(){
+ const id=Number(salePlayer.value);
+ const p=state.squad.find(x=>x.id===id);
+ if(!p){toast('Nessun giocatore selezionato');return}
+ const price=Number(salePrice.value)||0;
+ const annual=p.cost/p.years;
+ const book=Math.max(0,p.cost-annual*p.amortYears);
+ const pl=price-book;
+ state.market.push({id:Date.now(),player:p.name,price,book,pl,type:'sale'});
+ state.squad=state.squad.filter(x=>x.id!==id);
+ salePrice.value='';
+ save();render();toast('Cessione registrata');
+}
+function calc(){
+ const revenues=Object.values(state.revenues).reduce((a,b)=>a+(Number(b)||0),0);
+ const fixedCosts=Object.values(state.costs).reduce((a,b)=>a+(Number(b)||0),0);
+ const wages=state.squad.reduce((s,p)=>s+(Number(p.wage)||0),0);
+ const amort=state.squad.reduce((s,p)=>s+((Number(p.cost)||0)/Math.max(1,Number(p.years)||1)),0);
+ const marketPL=state.market.reduce((s,m)=>s+(Number(m.pl)||0),0);
+ const totalCosts=fixedCosts+wages+amort;
+ const net=revenues-totalCosts+marketPL;
+ return {revenues,fixedCosts,wages,amort,marketPL,totalCosts,net};
+}
+function render(){
+ const c=calc();
+ seasonBadge.textContent=state.season||'Stagione';
+ kpiRevenue.textContent=euro(c.revenues);
+ kpiCosts.textContent=euro(c.totalCosts);
+ kpiMarket.textContent=euro(c.marketPL); kpiMarket.className=c.marketPL>=0?'goodtxt':'badtxt';
+ kpiNet.textContent=euro(c.net); kpiNet.className=c.net>=0?'goodtxt':'badtxt';
+ kpiWages.textContent=euro(c.wages);
+ kpiAmort.textContent=euro(c.amort);
+
+ incomeTable.innerHTML=`
+ <tr><td>Ricavi operativi</td><td>${euro(c.revenues)}</td></tr>
+ <tr><td>Costi operativi fissi</td><td>-${euro(c.fixedCosts)}</td></tr>
+ <tr><td>Stipendi rosa</td><td>-${euro(c.wages)}</td></tr>
+ <tr><td>Ammortamenti cartellini</td><td>-${euro(c.amort)}</td></tr>
+ <tr><td>Plus/minusvalenze cessioni</td><td class="${c.marketPL>=0?'goodtxt':'badtxt'}">${euro(c.marketPL)}</td></tr>
+ <tr><td><b>Risultato netto</b></td><td class="${c.net>=0?'goodtxt':'badtxt'}"><b>${euro(c.net)}</b></td></tr>`;
+
+ squadList.innerHTML=state.squad.length?'':'<div class="empty">Nessun giocatore inserito.</div>';
+ state.squad.forEach(p=>{
+   const annual=p.cost/Math.max(1,p.years);
+   const book=Math.max(0,p.cost-annual*p.amortYears);
+   squadList.innerHTML+=`
+   <div class="player">
+     <div class="playerhead">
+       <div><div class="playername">${p.name}</div><div class="meta">${p.role} · contratto ${p.years} anni</div></div>
+       <button class="btn danger" onclick="removePlayer(${p.id})">Rimuovi</button>
+     </div>
+     <div class="playergrid">
+       <div class="stat"><small>Costo cartellino</small><b>${euro(p.cost)}</b></div>
+       <div class="stat"><small>Stipendio lordo</small><b>${euro(p.wage)}</b></div>
+       <div class="stat"><small>Ammortamento annuo</small><b>${euro(annual)}</b></div>
+       <div class="stat"><small>Valore contabile</small><b>${euro(book)}</b></div>
+     </div>
+   </div>`;
+ });
+
+ salePlayer.innerHTML=state.squad.length?'':'<option value="">Nessun giocatore</option>';
+ state.squad.forEach(p=>salePlayer.innerHTML+=`<option value="${p.id}">${p.name}</option>`);
+
+ marketList.innerHTML=state.market.length?'':'<div class="empty">Nessuna cessione registrata.</div>';
+ [...state.market].reverse().forEach(m=>{
+   marketList.innerHTML+=`
+   <div class="player">
+     <div class="playername">${m.player}</div>
+     <div class="meta">Cessione: ${euro(m.price)} · valore contabile: ${euro(m.book)}</div>
+     <div class="${m.pl>=0?'goodtxt':'badtxt'}" style="margin-top:8px;font-weight:800">
+       ${m.pl>=0?'Plusvalenza':'Minusvalenza'}: ${euro(m.pl)}
+     </div>
+   </div>`;
+ });
+}
+function exportData(){
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob); a.download=`bilancio_${(state.clubName||'squadra').replace(/\s+/g,'_')}_${state.season.replace('/','-')}.json`;
+ a.click(); URL.revokeObjectURL(a.href); toast('Dati esportati');
+}
+function resetAll(){
+ if(!confirm('Vuoi davvero cancellare tutti i dati?'))return;
+ state=structuredClone(defaultState); save(); location.reload();
+}
+bind();render();
+</script>
+</body>
+</html>
