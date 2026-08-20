@@ -7,38 +7,327 @@
 <title>Football Balance Manager</title>
 <style>
 :root{--bg:#07101d;--card:#0f172a;--card2:#121d34;--text:#eef4ff;--muted:#93a4bf;--border:#243453;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#07101d,#0b1425);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}.app{max-width:1120px;margin:auto;padding:16px 14px 96px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.top h1{font-size:24px;margin:0}.sub,.muted{color:var(--muted);font-size:12px}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge,.pill{border:1px solid var(--border);background:#12203a;padding:7px 10px;border-radius:999px;font-size:12px}.tabs{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(8,1fr);gap:7px;padding:10px 0;background:rgba(7,16,29,.95);backdrop-filter:blur(9px)}button{cursor:pointer}.tab,.btn{border-radius:10px;font-weight:800}.tab{border:1px solid var(--border);background:var(--card);color:var(--muted);padding:10px 5px;font-size:11px}.tab.active{background:var(--blue);color:white;border-color:transparent}.btn{border:0;padding:10px 12px}.primary{background:var(--blue);color:white}.good{background:var(--green);color:#031408}.ghost{background:#142038;color:#d6e3f7;border:1px solid var(--border)}.danger{background:#3d1720;color:#ffbac2;border:1px solid #6c2734}.warn{background:#49320f;color:#ffd88e;border:1px solid #73501a}.section{display:none}.section.active{display:block}.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:16px;padding:15px;margin-bottom:14px}.card h2{font-size:17px;margin:0 0 12px}.card h3{font-size:14px;margin:12px 0 8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}label{font-size:12px;color:var(--muted)}input,select{width:100%;background:#07101d;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:11px 12px}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:#0b1425;border:1px solid var(--border);border-radius:14px;padding:13px}.kpi small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.kpi strong{font-size:19px}.plus{color:#4ade80}.minus{color:#fb7185}.yellow{color:#fbbf24}.item{background:#0a1426;border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:9px}.itemhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.name{font-weight:800}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.stat{background:#101b30;border-radius:9px;padding:8px}.stat small{display:block;color:var(--muted);font-size:10px}.stat b{font-size:12px}.empty{text-align:center;color:var(--muted);padding:18px;font-size:13px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:9px;border-bottom:1px solid var(--border);font-size:12px;text-align:right}th:first-child,td:first-child{text-align:left}tr.me{background:rgba(59,130,246,.13)}.footer{position:fixed;bottom:0;left:0;right:0;background:rgba(7,16,29,.97);border-top:1px solid var(--border);z-index:20}.footerin{max-width:1120px;margin:auto;padding:9px 14px;display:flex;justify-content:space-between;gap:10px;align-items:center}.modalback{display:none;position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:50;padding:18px}.modal{max-width:720px;max-height:84vh;overflow:auto;margin:5vh auto;background:#0f172a;border:1px solid var(--border);border-radius:16px;padding:16px}.saveitem{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:11px;margin-top:8px}.toast{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:100;background:#111827;border:1px solid var(--border);border-radius:10px;padding:10px 14px}.note{color:var(--muted);font-size:12px;line-height:1.5}.sourcebox{border-left:3px solid var(--blue);padding:10px 12px;background:#0b1629;border-radius:8px;color:#b9c8df;font-size:12px;line-height:1.5}.fixture{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}.fixture .home{text-align:right}.score{font-weight:900;background:#111f36;border:1px solid var(--border);border-radius:9px;padding:6px 9px;min-width:58px;text-align:center}.simtag{display:inline-block;background:#3d2c0c;color:#ffd98a;border:1px solid #6a4b13;border-radius:999px;padding:3px 7px;font-size:10px}.realTag{display:inline-block;background:#0c3520;color:#86efac;border:1px solid #176638;border-radius:999px;padding:3px 7px;font-size:10px}.rankbox{font-size:34px;font-weight:900}.bar{height:8px;background:#07101d;border-radius:999px;overflow:hidden;border:1px solid var(--border)}.bar span{display:block;height:100%;background:var(--blue)}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#07101d,#0b1425);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}.app{max-width:1120px;margin:auto;padding:16px 14px 24px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center}.top h1{font-size:24px;margin:0}.sub,.muted{color:var(--muted);font-size:12px}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge,.pill{border:1px solid var(--border);background:#12203a;padding:7px 10px;border-radius:999px;font-size:12px}.tabs{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(7,1fr);gap:7px;padding:10px 0;background:rgba(7,16,29,.95);backdrop-filter:blur(9px)}button{cursor:pointer}.tab,.btn{border-radius:10px;font-weight:800}.tab{border:1px solid var(--border);background:var(--card);color:var(--muted);padding:10px 5px;font-size:11px}.tab.active{background:var(--blue);color:white;border-color:transparent}.btn{border:0;padding:10px 12px}.primary{background:var(--blue);color:white}.good{background:var(--green);color:#031408}.ghost{background:#142038;color:#d6e3f7;border:1px solid var(--border)}.danger{background:#3d1720;color:#ffbac2;border:1px solid #6c2734}.warn{background:#49320f;color:#ffd88e;border:1px solid #73501a}.section{display:none}.section.active{display:block}.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:16px;padding:15px;margin-bottom:14px}.card h2{font-size:17px;margin:0 0 12px}.card h3{font-size:14px;margin:12px 0 8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}label{font-size:12px;color:var(--muted)}input,select{width:100%;background:#07101d;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:11px 12px}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:#0b1425;border:1px solid var(--border);border-radius:14px;padding:13px}.kpi small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.kpi strong{font-size:19px}.plus{color:#4ade80}.minus{color:#fb7185}.yellow{color:#fbbf24}.item{background:#0a1426;border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:9px}.itemhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.name{font-weight:800}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}.stat{background:#101b30;border-radius:9px;padding:8px}.stat small{display:block;color:var(--muted);font-size:10px}.stat b{font-size:12px}.empty{text-align:center;color:var(--muted);padding:18px;font-size:13px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:9px;border-bottom:1px solid var(--border);font-size:12px;text-align:right}th:first-child,td:first-child{text-align:left}tr.me{background:rgba(59,130,246,.13)}.modalback{display:none;position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:50;padding:18px}.modal{max-width:720px;max-height:84vh;overflow:auto;margin:5vh auto;background:#0f172a;border:1px solid var(--border);border-radius:16px;padding:16px}.saveitem{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--border);border-radius:12px;padding:11px;margin-top:8px}.toast{display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:100;background:#111827;border:1px solid var(--border);border-radius:10px;padding:10px 14px}.note{color:var(--muted);font-size:12px;line-height:1.5}.sourcebox{border-left:3px solid var(--blue);padding:10px 12px;background:#0b1629;border-radius:8px;color:#b9c8df;font-size:12px;line-height:1.5}.fixture{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}.fixture .home{text-align:right}.score{font-weight:900;background:#111f36;border:1px solid var(--border);border-radius:9px;padding:6px 9px;min-width:58px;text-align:center}.simtag{display:inline-block;background:#3d2c0c;color:#ffd98a;border:1px solid #6a4b13;border-radius:999px;padding:3px 7px;font-size:10px}.realTag{display:inline-block;background:#0c3520;color:#86efac;border:1px solid #176638;border-radius:999px;padding:3px 7px;font-size:10px}.ovr{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:28px;border-radius:8px;background:#172554;border:1px solid #3157a8;color:#dbeafe;font-weight:900;font-size:12px}.loanTag{display:inline-block;background:#3b2f0d;color:#fde68a;border:1px solid #7c5b16;border-radius:999px;padding:3px 7px;font-size:10px}.estimateTag{display:inline-block;background:#2d2438;color:#e9d5ff;border:1px solid #6b4b83;border-radius:999px;padding:3px 7px;font-size:10px}.rankbox{font-size:34px;font-weight:900}.bar{height:8px;background:#07101d;border-radius:999px;overflow:hidden;border:1px solid var(--border)}.bar span{display:block;height:100%;background:var(--blue)}
 @media(max-width:900px){.tabs{grid-template-columns:repeat(4,1fr)}.kpis,.grid4{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:580px){.top{align-items:flex-start;flex-direction:column}.grid2,.grid3{grid-template-columns:1fr}.tab{font-size:10px}.fixture{grid-template-columns:1fr auto 1fr}.fixture{font-size:12px}}
+
+.dashboardHero{display:grid;grid-template-columns:1.35fr .65fr;gap:12px;margin-bottom:14px}
+.heroMain{background:linear-gradient(145deg,#10203b,#0d1729);border:1px solid var(--border);border-radius:18px;padding:18px}
+.heroSide{background:#0b1425;border:1px solid var(--border);border-radius:18px;padding:16px}
+.heroValue{font-size:34px;font-weight:900;line-height:1.05;margin:6px 0}.heroLabel{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.healthBadge{display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900;border:1px solid var(--border)}
+.health-good{background:#0c3520;color:#86efac;border-color:#176638}.health-warn{background:#3d2c0c;color:#fde68a;border-color:#6a4b13}.health-bad{background:#3d1720;color:#fecdd3;border-color:#6c2734}
+.quickGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.quickCard{background:#0b1425;border:1px solid var(--border);border-radius:14px;padding:13px}.quickCard small{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}.quickCard strong{font-size:18px}
+.finHealthGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.finHealthCard{background:#0b1425;border:1px solid var(--border);border-radius:14px;padding:14px}.finHealthCard .title{font-size:10px;color:var(--muted);margin-bottom:7px}.finHealthCard .value{font-size:20px;font-weight:900}.finHealthCard .desc{font-size:10px;color:var(--muted);line-height:1.4;margin-top:7px}
+.sectionLead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}.sectionLead h2{margin:0}.inlineHint{font-size:11px;color:var(--muted);line-height:1.4}
+.compactDetails{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.compactMetric{padding:9px 10px;border-radius:10px;background:#0a1426;border:1px solid var(--border)}.compactMetric small{display:block;font-size:9px;color:var(--muted)}.compactMetric b{font-size:12px}
+.simpleDivider{height:1px;background:var(--border);margin:14px 0}
+.playerEditTabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0}.playerEditTab{border:1px solid var(--border);background:#0b1425;color:var(--muted);border-radius:10px;padding:9px;font-size:11px;font-weight:800}.playerEditTab.active{background:var(--blue);color:white;border-color:transparent}
+.editPane{display:none}.editPane.active{display:block}.previewStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.previewMini{padding:10px;border-radius:11px;background:#0a1426;border:1px solid var(--border)}.previewMini small{display:block;color:var(--muted);font-size:9px;margin-bottom:4px}.previewMini b{font-size:13px}
+@media(max-width:900px){.dashboardHero{grid-template-columns:1fr}.finHealthGrid,.quickGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.finHealthGrid,.quickGrid,.compactDetails,.previewStrip{grid-template-columns:1fr 1fr}.playerEditTabs{grid-template-columns:1fr}}
+
+
+.gameGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gameMeters{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.gameMeter{background:#0b1425;border:1px solid var(--border);border-radius:12px;padding:11px}
+.gameMeter small{display:block;color:var(--muted);font-size:9px;margin-bottom:5px}
+.meterBar{height:7px;background:#101d31;border-radius:999px;overflow:hidden;margin-top:7px}
+.meterFill{height:100%;background:#60a5fa;border-radius:999px;transition:width .25s ease}
+.objective{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.objective:last-child{border-bottom:0}
+.objectiveStatus{font-size:10px;font-weight:900;border-radius:999px;padding:4px 7px;background:#172554;color:#bfdbfe;white-space:nowrap}
+.objectiveStatus.done{background:#0c3520;color:#86efac}
+.eventFeed{display:grid;gap:7px;max-height:230px;overflow:auto}
+.eventItem{padding:9px 10px;border-radius:10px;background:#0a1426;border:1px solid var(--border);font-size:11px;line-height:1.4}
+.eventItem small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.achievementRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.achievement{padding:5px 7px;border-radius:999px;background:#2a210b;border:1px solid #6c5214;color:#fde68a;font-size:9px;font-weight:900}
+.saveActive{border-color:#2563eb!important;box-shadow:0 0 0 1px rgba(37,99,235,.25) inset}
+.saveBadge{display:inline-block;background:#172554;color:#bfdbfe;border:1px solid #274690;border-radius:999px;padding:3px 7px;font-size:9px;font-weight:900;margin-left:6px}
+@media(max-width:800px){.gameGrid{grid-template-columns:1fr}.gameMeters{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:520px){.gameMeters{grid-template-columns:1fr}}
+
+
+.boardGoals{display:grid;grid-template-columns:1.05fr .95fr;gap:12px;margin-top:12px}
+.budgetBox{background:#0a1426;border:1px solid var(--border);border-radius:14px;padding:14px}
+.budgetTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.budgetAmount{font-size:26px;font-weight:900;margin:4px 0}
+.budgetProgress{height:10px;background:#101d31;border-radius:999px;overflow:hidden;margin:11px 0 8px}
+.budgetProgressFill{height:100%;background:#60a5fa;border-radius:999px;transition:width .25s ease}
+.budgetProgressFill.over{background:#fb7185}
+.budgetStatus{font-size:10px;font-weight:900;padding:5px 8px;border-radius:999px;white-space:nowrap}
+.budget-ok{background:#0c3520;color:#86efac;border:1px solid #176638}
+.budget-over{background:#3d1720;color:#fecdd3;border:1px solid #6c2734}
+.goalList{display:grid;gap:7px}
+.goalItem{background:#0a1426;border:1px solid var(--border);border-radius:11px;padding:10px}
+.goalHead{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.goalName{font-size:11px;font-weight:800}.goalValue{font-size:10px;color:var(--muted);margin-top:4px}
+.goalState{font-size:9px;font-weight:900;padding:4px 6px;border-radius:999px;white-space:nowrap}
+.goal-good{background:#0c3520;color:#86efac}.goal-warn{background:#3d2c0c;color:#fde68a}.goal-bad{background:#3d1720;color:#fecdd3}
+.boardReaction{margin-top:9px;font-size:10px;color:var(--muted);line-height:1.45}
+@media(max-width:800px){.boardGoals{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<div class="top"><div><h1>Football Balance Manager</h1><div class="sub">Bilancio, dati reali club e simulazione campionato</div></div><div class="badges"><span class="badge" id="clubBadge">Nuovo club</span><span class="badge" id="seasonBadge">2026/27</span><button class="btn ghost" onclick="openSaves()">Salvataggi</button></div></div>
+<div class="top"><div><h1>Football Balance Manager</h1><div class="sub">Gestione economica e sportiva semplificata</div></div><div class="badges"><span class="badge" id="clubBadge">Nuovo club</span><span class="badge" id="seasonBadge">2026/27</span><button class="btn ghost" onclick="openSaves()">Salvataggi</button></div></div>
 <div class="tabs">
-<button class="tab active" data-t="dash">Dashboard</button><button class="tab" data-t="rev">Ricavi</button><button class="tab" data-t="cost">Costi</button><button class="tab" data-t="squad">Rosa</button><button class="tab" data-t="market">Mercato</button><button class="tab" data-t="finance">Finanza</button><button class="tab" data-t="league">Campionato</button><button class="tab" data-t="history">Stagioni</button>
+<button class="tab active" data-t="dash">Home</button><button class="tab" data-t="budget">Bilancio</button><button class="tab" data-t="squad">Rosa</button><button class="tab" data-t="market">Mercato</button><button class="tab" data-t="finance">Finanza</button><button class="tab" data-t="league">Campionato</button><button class="tab" data-t="history">Stagioni</button>
 </div>
 
 <section id="dash" class="section active">
-<div class="card"><h2>Parti da una squadra reale</h2><div class="grid2"><div class="field"><label>Campionato</label><select disabled><option>Serie A 2026/27</option></select></div><div class="field"><label>Squadra</label><select id="realClubSelect"></select></div></div><div class="btnrow"><button class="btn good" onclick="loadRealClub(false)">Carica dati reali disponibili</button><button class="btn primary" onclick="loadRealClub(true)">Carica dati + stime bilancio</button></div><p class="note"><span class="realTag">REALE</span> Valore rosa, numero giocatori, età media e — dove disponibili — cassa/debiti finanziari provengono da dati pubblici recenti. <span class="simtag">STIMA</span> Ricavi e costi precaricati dal secondo pulsante sono stime per la simulazione e restano modificabili.</p></div>
-<div class="card"><h2>Club</h2><div class="grid3"><div class="field"><label>Nome squadra</label><input id="clubName"></div><div class="field"><label>Stagione</label><input id="season"></div><div class="field"><label>Nome salvataggio</label><input id="saveName"></div></div></div>
-<div id="realProfileCard" class="card" style="display:none"><div class="itemhead"><div><h2 style="margin:0">Dati reali caricati</h2><div class="muted" id="profileSource"></div></div><span class="realTag">DATI REALI</span></div><div class="kpis" style="margin-top:12px"><div class="kpi"><small>Valore rosa</small><strong id="profileMarket">€0</strong></div><div class="kpi"><small>Giocatori</small><strong id="profilePlayers">0</strong></div><div class="kpi"><small>Età media</small><strong id="profileAge">0</strong></div><div class="kpi"><small>Forza simulazione</small><strong id="profileStrength">0</strong></div></div><div id="profileFinanceNote" class="sourcebox" style="margin-top:12px"></div></div>
-<div class="kpis"><div class="kpi"><small>Ricavi</small><strong id="kRev">€0</strong></div><div class="kpi"><small>Costi</small><strong id="kCost">€0</strong></div><div class="kpi"><small>Mercato</small><strong id="kMarket">€0</strong></div><div class="kpi"><small>Utile / perdita</small><strong id="kNet">€0</strong></div><div class="kpi"><small>Stipendi</small><strong id="kWage">€0</strong></div><div class="kpi"><small>Ammortamenti</small><strong id="kAmort">€0</strong></div><div class="kpi"><small>Cassa</small><strong id="kCash">€0</strong></div><div class="kpi"><small>Debiti finanziari</small><strong id="kDebt">€0</strong></div></div>
-<div class="card" style="margin-top:14px"><h2>Conto economico sintetico</h2><div class="tablewrap"><table><tbody id="income"></tbody></table></div></div>
+<div class="dashboardHero">
+  <div class="heroMain">
+    <div class="heroLabel">Risultato economico della stagione</div>
+    <div class="heroValue" id="heroNet">€0</div>
+    <div id="heroHealth" class="healthBadge health-warn">Situazione da valutare</div>
+    <div class="compactDetails">
+      <div class="compactMetric"><small>Ricavi</small><b id="kRev">€0</b></div>
+      <div class="compactMetric"><small>Costi</small><b id="kCost">€0</b></div>
+      <div class="compactMetric"><small>Mercato</small><b id="kMarket">€0</b></div>
+      <div class="compactMetric"><small>Risultato netto</small><b id="kNet">€0</b></div>
+    </div>
+  </div>
+  <div class="heroSide">
+    <div class="heroLabel">Situazione finanziaria</div>
+    <div style="font-size:15px;font-weight:900;margin:7px 0" id="heroFinanceText">Dati insufficienti</div>
+    <div class="inlineHint" id="heroFinanceDesc">Inserisci cassa e debiti per ottenere una lettura sintetica.</div>
+    <div class="simpleDivider"></div>
+    <div class="btnrow">
+      <button class="btn primary" onclick="goTab('finance')">Apri finanza</button>
+      <button class="btn ghost" onclick="goTab('budget')">Apri bilancio</button>
+    </div>
+  </div>
+</div>
+
+<div class="quickGrid">
+  <div class="quickCard"><small>Cassa disponibile</small><strong id="kCash">€0</strong></div>
+  <div class="quickCard"><small>Debiti finanziari lordi</small><strong id="kDebt">€0</strong></div>
+  <div class="quickCard"><small>Stipendi rosa</small><strong id="kWage">€0</strong></div>
+  <div class="quickCard"><small>Ammortamenti</small><strong id="kAmort">€0</strong></div>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <div class="sectionLead">
+    <div>
+      <h2>Carriera manager</h2>
+      <div class="inlineHint">Le tue scelte sportive ed economiche influenzano dirigenza, tifosi e reputazione.</div>
+    </div>
+    <span id="managerLevelBadge" class="pill">Livello 1</span>
+  </div>
+
+  <div class="gameMeters">
+    <div class="gameMeter">
+      <small>Fiducia dirigenza</small>
+      <b id="boardTrust">70 / 100</b>
+      <div class="meterBar"><div id="boardBar" class="meterFill" style="width:70%"></div></div>
+    </div>
+    <div class="gameMeter">
+      <small>Umore tifosi</small>
+      <b id="fanMood">70 / 100</b>
+      <div class="meterBar"><div id="fanBar" class="meterFill" style="width:70%"></div></div>
+    </div>
+    <div class="gameMeter">
+      <small>Punti manager</small>
+      <b id="managerPoints">0 pt</b>
+      <div class="meterBar"><div id="managerBar" class="meterFill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="boardGoals">
+    <div class="budgetBox">
+      <div class="budgetTop">
+        <div>
+          <div class="heroLabel">Budget mercato della società</div>
+          <div id="marketBudgetRemaining" class="budgetAmount">€0</div>
+          <div class="inlineHint">Budget residuo dopo acquisti, prestiti, riscatti e cessioni.</div>
+        </div>
+        <span id="marketBudgetStatus" class="budgetStatus budget-ok">Dentro budget</span>
+      </div>
+      <div class="budgetProgress"><div id="marketBudgetBar" class="budgetProgressFill" style="width:0%"></div></div>
+      <div class="compactDetails">
+        <div class="compactMetric"><small>Budget iniziale</small><b id="marketBudgetInitial">€0</b></div>
+        <div class="compactMetric"><small>Acquisti</small><b id="marketBudgetSpent">€0</b></div>
+        <div class="compactMetric"><small>Cessioni</small><b id="marketBudgetIncome">€0</b></div>
+        <div class="compactMetric"><small>Spesa netta</small><b id="marketBudgetNet">€0</b></div>
+      </div>
+      <div id="budgetBoardReaction" class="boardReaction"></div>
+    </div>
+
+    <div>
+      <h3 style="margin-top:0">Obiettivi finanziari stagionali</h3>
+      <div id="financialObjectives" class="goalList"></div>
+    </div>
+  </div>
+
+  <div class="gameGrid" style="margin-top:12px">
+    <div>
+      <h3>Obiettivo sportivo</h3>
+      <div id="managerObjectives"></div>
+      <div id="achievementRow" class="achievementRow"></div>
+    </div>
+    <div>
+      <h3>Notizie del club</h3>
+      <div id="clubEventFeed" class="eventFeed"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px">
+  <div class="sectionLead">
+    <div><h2>Squadra e salvataggio</h2><div class="inlineHint">Imposta il club o carica una squadra reale.</div></div>
+    <button class="btn ghost" onclick="openSaves()">Salvataggi</button>
+  </div>
+  <div class="grid3">
+    <div class="field"><label>Nome squadra</label><input id="clubName"></div>
+    <div class="field"><label>Stagione</label><input id="season"></div>
+    <div class="field"><label>Nome salvataggio</label><input id="saveName"></div>
+  </div>
+  <div class="simpleDivider"></div>
+  <div class="grid2">
+    <div class="field"><label>Carica squadra reale - Serie A 2026/27</label><select id="realClubSelect"></select></div>
+    <div style="display:flex;align-items:end;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+      <button class="btn good" onclick="loadRealClub(false)">Carica club</button>
+      <button class="btn ghost" onclick="loadRealClub(true)">Club + stime bilancio</button>
+    </div>
+  </div>
+  <p class="note">Tutti i dati precaricati possono essere modificati. Dove non esiste un dato pubblico affidabile, il valore è una stima per la simulazione.</p>
+</div>
+
+<div id="realProfileCard" class="card" style="display:none">
+  <div class="itemhead"><div><h2 style="margin:0">Profilo squadra</h2><div class="muted" id="profileSource"></div></div><span class="realTag">DATABASE</span></div>
+  <div class="quickGrid" style="margin-top:12px">
+    <div class="quickCard"><small>Valore rosa</small><strong id="profileMarket">€0</strong></div>
+    <div class="quickCard"><small>Giocatori</small><strong id="profilePlayers">0</strong></div>
+    <div class="quickCard"><small>Età media</small><strong id="profileAge">0</strong></div>
+    <div class="quickCard"><small>Overall rosa</small><strong id="profileStrength">0</strong></div>
+  </div>
+  <div id="profileFinanceNote" class="sourcebox" style="margin-top:12px"></div>
+</div>
+
+<div class="card"><h2>Conto economico sintetico</h2><div class="tablewrap"><table><tbody id="income"></tbody></table></div></div>
 </section>
 
-<section id="rev" class="section"><div class="card"><h2>Ricavi annuali</h2><div class="grid2"><div class="field"><label>Diritti TV</label><input id="tv" type="number"></div><div class="field"><label>Sponsor e commerciale</label><input id="sponsor" type="number"></div><div class="field"><label>Biglietteria / matchday</label><input id="stadium" type="number"></div><div class="field"><label>Premi UEFA / coppe</label><input id="uefa" type="number"></div><div class="field"><label>Merchandising</label><input id="merch" type="number"></div><div class="field"><label>Altri ricavi</label><input id="otherRev" type="number"></div></div><p class="note">Le voci caricate automaticamente come stima servono solo come base di simulazione: puoi sostituirle con i valori ufficiali del bilancio del club.</p></div></section>
+<section id="budget" class="section">
+<div class="card"><div class="sectionLead"><div><h2>Bilancio della stagione</h2><div class="inlineHint">Ricavi e costi in un'unica schermata. Il risultato si aggiorna in tempo reale.</div></div><span class="pill">Conto economico</span></div></div>
+<div class="card"><h2>Ricavi annuali</h2><div class="grid2"><div class="field"><label>Diritti TV</label><input id="tv" type="number"></div><div class="field"><label>Sponsor e commerciale</label><input id="sponsor" type="number"></div><div class="field"><label>Biglietteria / matchday</label><input id="stadium" type="number"></div><div class="field"><label>Premi UEFA / coppe</label><input id="uefa" type="number"></div><div class="field"><label>Merchandising</label><input id="merch" type="number"></div><div class="field"><label>Altri ricavi</label><input id="otherRev" type="number"></div></div><p class="note">Le voci caricate automaticamente come stima servono solo come base di simulazione: puoi sostituirle con i valori ufficiali del bilancio del club.</p></div>
+<div class="card"><h2>Costi annuali</h2>
+<div class="field"><label>Metodo di calcolo del costo rosa</label><select id="costMode"><option value="detailed">Rosa dettagliata: usa costi, stipendi e ammortamenti dei singoli giocatori</option><option value="aggregate">Aggregato: usa le due voci complessive qui sotto</option></select></div>
+<div class="grid2"><div class="field"><label>Costo rosa aggregato / stipendi calciatori</label><input id="playerPayroll" type="number"></div><div class="field"><label>Ammortamenti rosa aggregati</label><input id="playerAmort" type="number"></div><div class="field"><label>Staff e dipendenti</label><input id="staff" type="number"></div><div class="field"><label>Stadio / centro sportivo</label><input id="facilities" type="number"></div><div class="field"><label>Commissioni agenti</label><input id="agents" type="number"></div><div class="field"><label>Costi amministrativi</label><input id="admin" type="number"></div><div class="field"><label>Altri costi operativi</label><input id="otherCosts" type="number"></div><div class="field"><label>Interessi / oneri finanziari</label><input id="interest" type="number"></div></div>
+<p class="note"><b>Rosa dettagliata</b> è la modalità consigliata per la simulazione: modificando costo storico del cartellino, anni di ammortamento o stipendio di un giocatore il bilancio cambia immediatamente. I costi precaricati sui giocatori reali sono stime simulativo-contabili e restano sempre modificabili.</p></div>
+<div class="card"><h2>Risultato sintetico</h2><div class="tablewrap"><table><tbody id="budgetIncome"></tbody></table></div></div>
+</section>
 
-<section id="cost" class="section"><div class="card"><h2>Costi annuali</h2><div class="grid2"><div class="field"><label>Costo rosa aggregato / stipendi calciatori</label><input id="playerPayroll" type="number"></div><div class="field"><label>Ammortamenti rosa aggregati</label><input id="playerAmort" type="number"></div><div class="field"><label>Staff e dipendenti</label><input id="staff" type="number"></div><div class="field"><label>Stadio / centro sportivo</label><input id="facilities" type="number"></div><div class="field"><label>Commissioni agenti</label><input id="agents" type="number"></div><div class="field"><label>Costi amministrativi</label><input id="admin" type="number"></div><div class="field"><label>Altri costi operativi</label><input id="otherCosts" type="number"></div><div class="field"><label>Interessi / oneri finanziari</label><input id="interest" type="number"></div></div><p class="note">Se le voci aggregate di stipendi/ammortamenti sono maggiori di zero, il programma usa quelle al posto della somma dei giocatori inseriti singolarmente, così evita il doppio conteggio. Metti 0 per passare alla rosa dettagliata.</p></div></section>
-
-<section id="squad" class="section"><div class="card"><h2>Aggiungi giocatore</h2><div class="grid3"><div class="field"><label>Nome</label><input id="pName"></div><div class="field"><label>Ruolo</label><select id="pRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CDC</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select></div><div class="field"><label>Età</label><input id="pAge" type="number"></div><div class="field"><label>Costo cartellino</label><input id="pCost" type="number"></div><div class="field"><label>Durata contratto (anni)</label><input id="pYears" type="number" value="5"></div><div class="field"><label>Anni già ammortizzati</label><input id="pDone" type="number" value="0"></div><div class="field"><label>Stipendio lordo annuo</label><input id="pWage" type="number"></div><div class="field"><label>Scadenza contratto</label><input id="pExpiry" placeholder="2031"></div><div class="field"><label>Valore residuo a bilancio</label><input id="pBook" type="number" placeholder="Lascia vuoto per calcolo automatico"></div><div class="field"><label>Valore di mercato</label><input id="pValue" type="number"></div></div><p class="note">Il valore residuo a bilancio è il valore contabile attuale del cartellino. Se lo lasci vuoto viene calcolato automaticamente da costo, durata e anni già ammortizzati.</p><button class="btn primary" onclick="addPlayer()">Aggiungi alla rosa</button></div><div class="card"><h2>Rosa dettagliata</h2><div id="squadList"></div></div></section>
+<section id="squad" class="section"><div class="card"><h2>Aggiungi giocatore</h2><div class="grid3"><div class="field"><label>Nome</label><input id="pName"></div><div class="field"><label>Ruolo</label><select id="pRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CDC</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select></div><div class="field"><label>Età</label><input id="pAge" type="number"></div><div class="field"><label>Overall (0-99)</label><input id="pOverall" type="number" min="1" max="99" placeholder="Es. 82"></div><div class="field"><label>Costo storico del cartellino</label><input id="pCost" type="number"></div><div class="field"><label>Durata contratto (anni)</label><input id="pYears" type="number" value="5"></div><div class="field"><label>Anni già ammortizzati</label><input id="pDone" type="number" value="0"></div><div class="field"><label>Stipendio lordo annuo</label><input id="pWage" type="number"></div><div class="field"><label>Scadenza contratto</label><input id="pExpiry" placeholder="2031"></div><div class="field"><label>Valore residuo a bilancio</label><input id="pBook" type="number" placeholder="Lascia vuoto per calcolo automatico"></div><div class="field"><label>Valore di mercato</label><input id="pValue" type="number"></div></div><p class="note">Costo storico, valore residuo, durata dell'ammortamento, stipendio, overall e valore di mercato sono sempre modificabili. L'ammortamento viene calcolato sul valore residuo e sugli anni residui.</p><button class="btn primary" onclick="addPlayer()">Aggiungi alla rosa</button></div><div class="card"><h2>Rosa dettagliata</h2><p class="note">I giocatori caricati dal database hanno già un costo storico e uno stipendio <b>stimati per la simulazione</b>. Premi <b>Modifica costi</b> per sostituirli con i dati reali che conosci: l'ammortamento e il bilancio si aggiornano subito.</p><div id="squadList"></div></div></section>
 
 <section id="market" class="section">
-<div class="card"><h2>Mercato in entrata</h2><p class="note">Scegli la squadra di provenienza e poi un giocatore del database Serie A. Età, ruolo e valore di mercato vengono compilati automaticamente; prezzo, contratto e stipendio li decidi tu.</p><div class="grid3"><div class="field"><label>Squadra di provenienza</label><select id="buyClub" onchange="populateBuyPlayers()"></select></div><div class="field"><label>Giocatore</label><select id="buyPlayer" onchange="previewBuyPlayer()"></select></div><div class="field"><label>Valore di mercato indicativo</label><input id="buyMarketValue" type="number" readonly></div><div class="field"><label>Prezzo di acquisto</label><input id="buyPrice" type="number"></div><div class="field"><label>Durata nuovo contratto (anni)</label><input id="buyYears" type="number" value="5" min="1"></div><div class="field"><label>Stipendio lordo annuo</label><input id="buyWage" type="number"></div><div class="field"><label>Pagamento immediato</label><input id="buyUpfront" type="number" placeholder="Se vuoto = prezzo intero"></div><div class="field"><label>Scadenza contratto</label><input id="buyExpiry" placeholder="Es. 2031"></div></div><div id="buyPreview" class="sourcebox" style="margin-bottom:12px">Seleziona un giocatore.</div><button class="btn good" onclick="buyPlayer()">Acquista giocatore</button></div>
-<div class="card"><h2>Cessione</h2><div class="grid2"><div class="field"><label>Giocatore</label><select id="salePlayer"></select></div><div class="field"><label>Prezzo di vendita</label><input id="salePrice" type="number"></div></div><button class="btn good" onclick="sellPlayer()">Registra cessione</button></div>
-<div class="card"><h2>Prestito</h2><div class="grid3"><div class="field"><label>Giocatore</label><select id="loanPlayer"></select></div><div class="field"><label>Tipo</label><select id="loanType"><option value="out">In uscita</option><option value="in">In entrata</option></select></div><div class="field"><label>Incasso / costo</label><input id="loanFee" type="number"></div></div><button class="btn primary" onclick="loan()">Registra prestito</button></div>
-<div class="card"><h2>Storico mercato</h2><div id="marketList"></div></div></section>
+<div class="card">
+<h2>Mercato in entrata</h2>
+<p class="note">Puoi scrivere liberamente qualsiasi giocatore e qualsiasi club. Se scegli un club/giocatore dal database, i dati disponibili vengono compilati automaticamente; altrimenti inserisci tutto manualmente.</p>
+<div class="grid3">
+<div class="field"><label>Club di provenienza</label><input id="buyClubText" list="clubSuggestions" placeholder="Scrivi qualsiasi club" oninput="matchBuyClub()"><datalist id="clubSuggestions"></datalist></div>
+<div class="field"><label>Nome giocatore</label><input id="buyPlayerText" list="playerSuggestions" placeholder="Scrivi qualsiasi giocatore" oninput="matchBuyPlayer()"><datalist id="playerSuggestions"></datalist></div>
+<div class="field"><label>Paese / campionato</label><input id="buyCountry" placeholder="Es. Inghilterra"></div>
 
-<section id="finance" class="section"><div class="card"><h2>Situazione finanziaria</h2><div class="grid2"><div class="field"><label>Cassa</label><input id="cash" type="number"></div><div class="field"><label>Debiti finanziari lordi</label><input id="debt" type="number"></div><div class="field"><label>Crediti finanziari</label><input id="finAssets" type="number"></div><div class="field"><label>Patrimonio netto iniziale</label><input id="equity" type="number"></div></div></div><div class="card"><h2>Riepilogo</h2><div class="kpis"><div class="kpi"><small>Liquidità + crediti</small><strong id="fLiquid">€0</strong></div><div class="kpi"><small>Debiti netti</small><strong id="fNetDebt">€0</strong></div><div class="kpi"><small>Patrimonio netto stimato</small><strong id="fEquity">€0</strong></div><div class="kpi"><small>Valore contabile rosa</small><strong id="fSquad">€0</strong></div></div><p class="note">Debiti finanziari netti = debiti finanziari lordi − cassa − crediti finanziari.</p></div></section>
+<div class="field"><label>Ruolo</label><select id="buyRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CDC</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select></div>
+<div class="field"><label>Età</label><input id="buyAge" type="number"></div>
+<div class="field"><label>Overall</label><input id="buyOverall" type="number" min="1" max="99"></div>
+
+<div class="field"><label>Valore di mercato indicativo</label><input id="buyMarketValue" type="number"></div>
+<div class="field"><label>Prezzo di acquisto</label><input id="buyPrice" type="number"></div>
+<div class="field"><label>Durata nuovo contratto (anni)</label><input id="buyYears" type="number" value="5" min="1"></div>
+
+<div class="field"><label>Stipendio lordo annuo</label><input id="buyWage" type="number"></div>
+<div class="field"><label>Pagamento immediato</label><input id="buyUpfront" type="number" placeholder="Se vuoto = prezzo intero"></div>
+<div class="field"><label>Scadenza contratto</label><input id="buyExpiry" placeholder="Es. 2031"></div>
+</div>
+<div class="btnrow" style="margin-bottom:12px">
+<button class="btn ghost" onclick="clearBuyForm()">Pulisci campi</button>
+<button class="btn ghost" onclick="fillBuyEstimate()">Stima dati mancanti</button>
+</div>
+<div id="buyPreview" class="sourcebox" style="margin-bottom:12px">Scrivi il nome di un giocatore oppure selezionalo dai suggerimenti.</div>
+<button class="btn good" onclick="buyPlayer()">Acquista giocatore</button>
+</div>
+
+<div class="card">
+<h2>Cessione</h2>
+<div class="grid3">
+<div class="field"><label>Giocatore</label><select id="salePlayer"></select></div>
+<div class="field"><label>Prezzo di vendita</label><input id="salePrice" type="number"></div>
+<div class="field"><label>Paese destinazione</label><select id="saleCountry"><option>Italia</option><option>Inghilterra</option><option>Spagna</option><option>Germania</option><option>Francia</option><option>Portogallo</option><option>Paesi Bassi</option><option>Arabia Saudita</option><option>Altro</option></select></div>
+<div class="field"><label>Club di destinazione</label><input id="saleTo" placeholder="Es. Real Madrid"></div>
+</div>
+<div id="salePreview" class="sourcebox" style="margin-bottom:12px">Seleziona un giocatore e imposta il prezzo.</div>
+<button class="btn good" onclick="sellPlayer()">Registra cessione</button>
+</div>
+
+<div class="card">
+<h2>Prestiti</h2>
+<p class="note">Prestito secco, diritto di riscatto e obbligo di riscatto. “Quota stipendio a tuo carico” indica la percentuale pagata dal tuo club.</p>
+<div class="grid3">
+<div class="field"><label>Direzione</label><select id="loanType" onchange="setupLoanControls()"><option value="out">In uscita</option><option value="in">In entrata</option></select></div>
+<div class="field"><label>Club controparte</label><input id="loanClubText" list="clubSuggestions" placeholder="Scrivi qualsiasi club" oninput="populateLoanPlayers()"></div>
+<div class="field"><label>Giocatore</label><select id="loanPlayer" onchange="previewLoan()"></select></div>
+<div class="field"><label>Costo / incasso prestito</label><input id="loanFee" type="number"></div>
+<div class="field"><label>Formula riscatto</label><select id="loanClause" onchange="previewLoan()"><option value="none">Nessun riscatto</option><option value="option">Diritto di riscatto</option><option value="obligation">Obbligo di riscatto</option></select></div>
+<div class="field"><label>Prezzo di riscatto</label><input id="loanBuyout" type="number"></div>
+<div class="field"><label>Quota stipendio a tuo carico (%)</label><input id="loanWageShare" type="number" min="0" max="100" value="100"></div>
+<div class="field"><label>Stipendio lordo annuo (prestito in entrata)</label><input id="loanWage" type="number"></div>
+<div class="field"><label>Contratto dopo eventuale riscatto (anni)</label><input id="loanBuyYears" type="number" min="1" value="4"></div>
+</div>
+<div id="loanCustomFields" style="display:none"><div class="grid3">
+<div class="field"><label>Club manuale</label><input id="loanCustomClub" placeholder="Club estero non presente"></div>
+<div class="field"><label>Giocatore manuale</label><input id="loanCustomName"></div>
+<div class="field"><label>Ruolo</label><select id="loanCustomRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CDC</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select></div>
+<div class="field"><label>Età</label><input id="loanCustomAge" type="number"></div>
+<div class="field"><label>Valore mercato</label><input id="loanCustomValue" type="number"></div>
+<div class="field"><label>Overall</label><input id="loanCustomOverall" type="number" min="1" max="99"></div>
+</div></div>
+<div id="loanPreview" class="sourcebox" style="margin-bottom:12px">Configura il prestito.</div>
+<button class="btn primary" onclick="loan()">Registra prestito</button>
+</div>
+
+<div class="card"><h2>Storico mercato</h2><div id="marketList"></div></div>
+</section>
+
+<section id="finance" class="section">
+<div class="card">
+  <div class="sectionLead">
+    <div><h2>Situazione finanziaria</h2><div class="inlineHint">Inserisci solo quattro dati. Gli indici sotto vengono calcolati automaticamente.</div></div>
+    <span id="financeOverallBadge" class="healthBadge health-warn">Da valutare</span>
+  </div>
+  <div class="grid2">
+    <div class="field"><label>Cassa e liquidità</label><input id="cash" type="number"></div>
+    <div class="field"><label>Debiti finanziari lordi</label><input id="debt" type="number"></div>
+    <div class="field"><label>Crediti / attività finanziarie</label><input id="finAssets" type="number"></div>
+    <div class="field"><label>Patrimonio netto iniziale</label><input id="equity" type="number"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Indici di sintesi</h2>
+  <div class="finHealthGrid">
+    <div class="finHealthCard"><div class="title">PFN / Debito finanziario netto</div><div class="value" id="fNetDebt">€0</div><div class="desc" id="fNetDebtDesc">Debiti lordi meno cassa e crediti finanziari. Più è basso, meglio è.</div></div>
+    <div class="finHealthCard"><div class="title">Liquidità disponibile</div><div class="value" id="fLiquid">€0</div><div class="desc">Cassa + crediti finanziari.</div></div>
+    <div class="finHealthCard"><div class="title">Copertura dei costi</div><div class="value" id="fCashMonths">0 mesi</div><div class="desc">Mesi di costi annuali coperti dalla sola cassa.</div></div>
+    <div class="finHealthCard"><div class="title">PFN / Ricavi</div><div class="value" id="fDebtRevenue">0%</div><div class="desc">Quanto pesa il debito netto rispetto ai ricavi della stagione.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Altri indicatori</h2>
+  <div class="quickGrid">
+    <div class="quickCard"><small>Patrimonio netto stimato</small><strong id="fEquity">€0</strong></div>
+    <div class="quickCard"><small>Valore contabile rosa</small><strong id="fSquad">€0</strong></div>
+    <div class="quickCard"><small>Margine netto</small><strong id="fMargin">0%</strong></div>
+    <div class="quickCard"><small>Costo rosa / ricavi</small><strong id="fSquadCostRatio">0%</strong></div>
+  </div>
+  <p class="note">Sono indicatori gestionali semplificati per la simulazione, non parametri ufficiali UEFA.</p>
+</div>
+
+<div class="card"><h2>Lettura rapida</h2><div id="financeSummary" class="sourcebox">Inserisci i dati per ottenere una sintesi.</div></div>
+</section>
 
 <section id="league" class="section">
 <div class="card"><div class="itemhead"><div><h2 style="margin:0">Simulazione Serie A</h2><div class="muted">20 squadre reali 2026/27, calendario generato e risultati probabilistici.</div></div><span class="simtag">SIMULAZIONE</span></div><div class="grid3" style="margin-top:12px"><div class="field"><label>Squadra controllata</label><input id="leagueClub" disabled></div><div class="field"><label>Forza squadra controllata (0-100)</label><input id="leagueStrength" type="number" min="50" max="99"></div><div class="field"><label>Giornata corrente</label><input id="leagueRound" disabled></div></div><div class="btnrow"><button class="btn primary" onclick="newLeague()">Nuovo campionato</button><button class="btn good" onclick="simulateRound()">Simula giornata</button><button class="btn ghost" onclick="simulateFive()">Simula 5 giornate</button><button class="btn warn" onclick="simulateAll()">Simula fino alla fine</button><button class="btn danger" onclick="resetLeague()">Azzera campionato</button></div><p class="note">La forza iniziale deriva dal valore di mercato della rosa. Puoi modificarla per riflettere acquisti, cessioni, infortuni o una tua valutazione. I risultati non sono previsioni: sono simulazioni casuali pesate sulla forza delle squadre e sul fattore casa.</p></div>
@@ -50,8 +339,85 @@
 <section id="history" class="section"><div class="card"><h2>Gestione stagioni</h2><p class="note">Archivia i risultati della stagione prima di passare a quella successiva. La nuova stagione mantiene rosa e situazione finanziaria, aumenta di un anno età e ammortamento dei giocatori e azzera ricavi/costi annuali e operazioni di mercato.</p><div class="btnrow"><button class="btn good" onclick="closeSeason()">Archivia stagione</button><button class="btn primary" onclick="nextSeason()">Avvia stagione successiva</button></div></div><div class="card"><h2>Storico stagioni</h2><div id="historyList"></div></div></section>
 </div>
 
-<div class="footer"><div class="footerin"><span class="muted" id="saveState">Autosalvataggio attivo</span><div class="btnrow"><button class="btn ghost" onclick="exportSave()">Esporta backup</button><button class="btn ghost" onclick="document.getElementById('importFile').click()">Importa</button><input type="file" id="importFile" accept=".json" hidden></div></div></div>
-<div class="modalback" id="saveModal"><div class="modal"><div class="itemhead"><div><div class="name" style="font-size:20px">Salvataggi</div><div class="muted">Carriere separate, salvate automaticamente nel browser.</div></div><button class="btn ghost" onclick="closeSaves()">Chiudi</button></div><div class="grid2" style="margin-top:14px"><div class="field"><label>Nome nuovo salvataggio</label><input id="newSaveName" placeholder="Es. Roma 2026"></div><div style="display:flex;align-items:end;margin-bottom:10px"><button class="btn primary" onclick="newSave()">Crea nuovo</button></div></div><div id="saveList"></div></div></div>
+
+<div class="modalback" id="saveModal"><div class="modal">
+<div class="itemhead">
+  <div><div class="name" style="font-size:20px">Carriere e salvataggi</div><div class="muted">Ogni carriera è indipendente. Il salvataggio è automatico, ma puoi anche forzarlo manualmente.</div></div>
+  <button class="btn ghost" onclick="closeSaves()">Chiudi</button>
+</div>
+<div class="btnrow" style="margin-top:12px">
+  <button class="btn good" onclick="manualSave()">Salva adesso</button>
+  <span id="saveModalStatus" class="muted"></span>
+</div>
+<div class="grid2" style="margin-top:14px">
+  <div class="field"><label>Nome nuova carriera</label><input id="newSaveName" placeholder="Es. Roma - scalata europea"></div>
+  <div style="display:flex;align-items:end;margin-bottom:10px"><button class="btn primary" onclick="newSave()">Crea e apri</button></div>
+</div>
+<div id="saveList"></div>
+</div></div>
+
+<div id="playerEditModal" class="editModalBack" onclick="closePlayerEditor(event)">
+  <div class="editModal" onclick="event.stopPropagation()">
+    <div class="editModalTop">
+      <div><h2 id="editModalTitle">Modifica giocatore</h2><p id="editPlayerSubtitle">Cambia solo i dati che ti servono.</p></div>
+      <button class="btn ghost" onclick="closePlayerEditor()">Chiudi</button>
+    </div>
+    <input id="editPlayerId" type="hidden">
+
+    <div class="playerEditTabs">
+      <button class="playerEditTab active" data-edit-pane="base" onclick="showEditPane('base')">Dati base</button>
+      <button class="playerEditTab" data-edit-pane="contract" onclick="showEditPane('contract')">Contratto</button>
+      <button class="playerEditTab" data-edit-pane="accounting" onclick="showEditPane('accounting')">Contabilità</button>
+    </div>
+
+    <div id="editPaneBase" class="editPane active">
+      <div class="grid2">
+        <div class="field"><label>Nome</label><input id="editName"></div>
+        <div class="field"><label>Ruolo</label><select id="editRole"><option>POR</option><option>DC</option><option>TD</option><option>TS</option><option>CDC</option><option>CC</option><option>COC</option><option>AD</option><option>AS</option><option>ATT</option></select></div>
+        <div class="field"><label>Età</label><input id="editAge" type="number"></div>
+        <div class="field"><label>Overall</label><input id="editOverall" type="number" min="1" max="99"></div>
+        <div class="field"><label>Valore di mercato</label><input id="editValue" type="number"></div>
+      </div>
+    </div>
+
+    <div id="editPaneContract" class="editPane">
+      <div class="grid2">
+        <div class="field"><label>Stipendio lordo annuo</label><input id="editWage" type="number"></div>
+        <div class="field"><label>Quota stipendio a tuo carico (%)</label><input id="editWageShare" type="number" min="0" max="100"></div>
+        <div class="field"><label>Scadenza contratto</label><input id="editExpiry"></div>
+      </div>
+    </div>
+
+    <div id="editPaneAccounting" class="editPane">
+      <div class="field">
+        <label>Calcolo del valore residuo</label>
+        <select id="editBookMode" onchange="updateEditPreview()">
+          <option value="auto">Automatico — consigliato</option>
+          <option value="manual">Manuale</option>
+        </select>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Costo storico cartellino</label><input id="editCost" type="number"></div>
+        <div class="field"><label>Durata ammortamento totale (anni)</label><input id="editYears" type="number" min="1"></div>
+        <div class="field"><label>Anni già ammortizzati</label><input id="editDone" type="number" min="0"></div>
+        <div class="field"><label>Valore residuo a bilancio</label><input id="editBook" type="number"></div>
+      </div>
+      <div id="editBookHelp" class="sourcebox">In modalità automatica il valore residuo viene ricalcolato subito.</div><div id="editCostSavedInfo" class="muted" style="margin-top:7px;font-size:10px"></div>
+    </div>
+
+    <p class="note" style="margin:12px 0 0">Le modifiche vengono applicate solo quando premi <b>Salva modifiche</b>.</p>
+    <div class="previewStrip">
+      <div class="previewMini"><small>Ammortamento annuo</small><b id="editPrevAmort">€0</b></div>
+      <div class="previewMini"><small>Stipendio a carico club</small><b id="editPrevWage">€0</b></div>
+      <div class="previewMini"><small>Costo annuo totale</small><b id="editPrevTotal">€0</b></div>
+    </div>
+
+    <div class="editActions">
+      <button class="btn ghost" onclick="closePlayerEditor()">Annulla</button>
+      <button class="btn primary" onclick="savePlayerEditor()">Salva modifiche</button>
+    </div>
+  </div>
+</div>
 <div id="toast" class="toast"></div>
 
 <script>
@@ -149,93 +515,731 @@ const PLAYER_DB={
  ]
 };
 
+
+// Database indicativo e modificabile. Snapshot estivo 2026: le rose possono cambiare.
+const SERIE_A_EXTRAS={
+ inter:[{n:'Nicolò Barella',r:'CC',a:29,v:80000000},{n:'Federico Dimarco',r:'TS',a:28,v:55000000},{n:'Carlos Augusto',r:'TS',a:27,v:26000000},{n:'Djed Spence',r:'TD',a:26,v:30000000},{n:'Kristjan Asllani',r:'CDC',a:24,v:18000000},{n:'Henrikh Mkhitaryan',r:'CC',a:37,v:2500000},{n:'Benjamin Pavard',r:'DC',a:30,v:20000000}],
+ milan:[{n:'Mario Gila',r:'DC',a:25,v:28000000},{n:'Gonçalo Ramos',r:'ATT',a:25,v:40000000},{n:'Fikayo Tomori',r:'DC',a:28,v:25000000},{n:'Ruben Loftus-Cheek',r:'CC',a:30,v:13000000},{n:'Davide Bartesaghi',r:'TS',a:20,v:12000000},{n:'Lorenzo Torriani',r:'POR',a:21,v:3500000}],
+ juventus:[{n:'Michele Di Gregorio',r:'POR',a:29,v:22000000},{n:'Andrea Cambiaso',r:'TS',a:26,v:40000000},{n:'Federico Gatti',r:'DC',a:28,v:22000000},{n:'Khéphren Thuram',r:'CC',a:25,v:45000000},{n:'Teun Koopmeiners',r:'COC',a:28,v:35000000},{n:'Kenan Yıldız',r:'AS',a:21,v:75000000}],
+ napoli:[{n:'Matteo Politano',r:'AD',a:33,v:10000000},{n:'Leonardo Spinazzola',r:'TS',a:33,v:5000000},{n:'Juan Jesus',r:'DC',a:35,v:1500000},{n:'Pasquale Mazzocchi',r:'TD',a:31,v:3000000}],
+ roma:[{n:'Pierluigi Gollini',r:'POR',a:31,v:3500000},{n:'Devyne Rensch',r:'TD',a:23,v:18000000},{n:'Mario Hermoso',r:'DC',a:31,v:8000000},{n:'Jan Ziółkowski',r:'DC',a:21,v:12000000},{n:'Bryan Cristante',r:'CC',a:31,v:11000000},{n:'Lorenzo Pellegrini',r:'COC',a:30,v:14000000},{n:'Tommaso Baldanzi',r:'COC',a:23,v:14000000}],
+ atalanta:[{n:'Marco Carnesecchi',r:'POR',a:26,v:25000000},{n:'Berat Djimsiti',r:'DC',a:33,v:6000000},{n:'Éderson',r:'CC',a:27,v:50000000},{n:'Isak Hien',r:'DC',a:27,v:25000000}],
+ como:[{n:'Jean Butez',r:'POR',a:31,v:5000000},{n:'Alberto Dossena',r:'DC',a:27,v:10000000},{n:'Assane Diao',r:'AD',a:20,v:35000000},{n:'Gabriel Strefezza',r:'AD',a:29,v:8000000}],
+ fiorentina:[{n:'Pietro Comuzzo',r:'DC',a:21,v:22000000},{n:'Fabiano Parisi',r:'TS',a:25,v:10000000},{n:'Amir Richardson',r:'CC',a:24,v:12000000},{n:'Robin Gosens',r:'TS',a:32,v:7000000}],
+ lazio:[{n:'Matteo Guendouzi',r:'CC',a:27,v:28000000},{n:'Nicolò Rovella',r:'CDC',a:24,v:30000000},{n:'Patric',r:'DC',a:33,v:2500000},{n:'Gustav Isaksen',r:'AD',a:25,v:18000000}],
+ bologna:[{n:'Łukasz Skorupski',r:'POR',a:35,v:2000000},{n:'Jhon Lucumí',r:'DC',a:28,v:24000000},{n:'Remo Freuler',r:'CDC',a:34,v:5000000},{n:'Tommaso Pobega',r:'CC',a:27,v:10000000}],
+ sassuolo:[{n:'Domenico Berardi',r:'AD',a:32,v:12000000},{n:'Josh Doig',r:'TS',a:24,v:9000000},{n:'Martin Erlić',r:'DC',a:28,v:6000000},{n:'Nemanja Matić',r:'CDC',a:38,v:1200000}],
+ parma:[{n:'Zion Suzuki',r:'POR',a:24,v:18000000},{n:'Mandela Keita',r:'CDC',a:24,v:14000000},{n:'Hernani',r:'CC',a:32,v:2500000},{n:'Adrian Benedyczak',r:'ATT',a:25,v:5000000}],
+ genoa:[{n:'Nicola Leali',r:'POR',a:33,v:1500000},{n:'Aarón Martín',r:'TS',a:29,v:8000000},{n:'Milan Badelj',r:'CDC',a:37,v:800000},{n:'Vitinha',r:'ATT',a:26,v:10000000}],
+ udinese:[{n:'Maduka Okoye',r:'POR',a:27,v:9000000},{n:'Thomas Kristensen',r:'DC',a:24,v:7000000},{n:'Arthur Atta',r:'CC',a:23,v:12000000},{n:'Keinan Davis',r:'ATT',a:28,v:5000000}],
+ torino:[{n:'Nikola Vlašić',r:'COC',a:28,v:12000000},{n:'Che Adams',r:'ATT',a:30,v:8000000},{n:'Valentino Lazaro',r:'TD',a:30,v:5000000},{n:'Adrien Tameze',r:'CDC',a:32,v:3500000}],
+ cagliari:[{n:'Gabriele Zappa',r:'TD',a:26,v:7000000},{n:'Yerry Mina',r:'DC',a:31,v:4000000},{n:'Antoine Makoumbou',r:'CDC',a:28,v:6000000},{n:'Zito Luvumbo',r:'AS',a:24,v:9000000}],
+ venezia:[{n:'Jesse Joronen',r:'POR',a:33,v:800000},{n:'Hans Nicolussi Caviglia',r:'CC',a:26,v:9000000},{n:'Gianluca Busio',r:'CC',a:24,v:7000000},{n:'Christian Gytkjær',r:'ATT',a:36,v:500000}],
+ frosinone:[{n:'Michele Cerofolini',r:'POR',a:27,v:1800000},{n:'Ilario Monterisi',r:'DC',a:24,v:3500000},{n:'Luca Garritano',r:'CC',a:32,v:1000000},{n:'Giuseppe Ambrosino',r:'ATT',a:22,v:5000000}],
+ lecce:[{n:'Wladimiro Falcone',r:'POR',a:31,v:5000000},{n:'Federico Baschirotto',r:'DC',a:29,v:5000000},{n:'Ylber Ramadani',r:'CDC',a:30,v:4000000},{n:'Lameck Banda',r:'AS',a:25,v:7000000}],
+ monza:[{n:'Stefano Pizzignacco',r:'POR',a:25,v:1800000},{n:'Armando Izzo',r:'DC',a:34,v:2500000},{n:'Matteo Pessina',r:'CC',a:29,v:12000000},{n:'Gianluca Caprari',r:'COC',a:33,v:2000000}]
+};
+Object.entries(SERIE_A_EXTRAS).forEach(([cid,arr])=>{const seen=new Set((PLAYER_DB[cid]||[]).map(p=>p.n.toLowerCase()));PLAYER_DB[cid]=[...(PLAYER_DB[cid]||[]),...arr.filter(p=>!seen.has(p.n.toLowerCase()))]});
+
+const FOREIGN_CLUBS={
+ real_madrid:{name:'Real Madrid',country:'Spagna',league:'LaLiga'},
+ barcelona:{name:'Barcelona',country:'Spagna',league:'LaLiga'},
+ man_city:{name:'Manchester City',country:'Inghilterra',league:'Premier League'},
+ liverpool:{name:'Liverpool',country:'Inghilterra',league:'Premier League'},
+ arsenal:{name:'Arsenal',country:'Inghilterra',league:'Premier League'},
+ chelsea:{name:'Chelsea',country:'Inghilterra',league:'Premier League'},
+ bayern:{name:'Bayern Monaco',country:'Germania',league:'Bundesliga'},
+ psg:{name:'Paris Saint-Germain',country:'Francia',league:'Ligue 1'}
+};
+const FOREIGN_DB={
+ real_madrid:[{n:'Thibaut Courtois',r:'POR',a:34,v:25000000,o:88},{n:'Andriy Lunin',r:'POR',a:27,v:18000000,o:81},{n:'Éder Militão',r:'DC',a:28,v:35000000,o:84},{n:'Antonio Rüdiger',r:'DC',a:33,v:12000000,o:84},{n:'Trent Alexander-Arnold',r:'TD',a:27,v:65000000,o:87},{n:'Denzel Dumfries',r:'TD',a:30,v:25000000,o:84},{n:'Marc Cucurella',r:'TS',a:28,v:40000000,o:84},{n:'Ibrahima Konaté',r:'DC',a:27,v:50000000,o:85},{n:'Jude Bellingham',r:'COC',a:23,v:150000000,o:91},{n:'Federico Valverde',r:'CC',a:28,v:120000000,o:90},{n:'Eduardo Camavinga',r:'CC',a:23,v:80000000,o:87},{n:'Aurélien Tchouaméni',r:'CDC',a:26,v:90000000,o:88},{n:'Bernardo Silva',r:'COC',a:32,v:30000000,o:86},{n:'Vinícius Júnior',r:'AS',a:26,v:150000000,o:91},{n:'Kylian Mbappé',r:'ATT',a:27,v:180000000,o:93},{n:'Rodrygo',r:'AD',a:25,v:85000000,o:87},{n:'Endrick',r:'ATT',a:20,v:60000000,o:83},{n:'Yan Diomande',r:'AS',a:19,v:70000000,o:82}],
+ barcelona:[{n:'Joan García',r:'POR',a:25,v:35000000,o:83},{n:'Wojciech Szczęsny',r:'POR',a:36,v:2000000,o:80},{n:'Pau Cubarsí',r:'DC',a:19,v:80000000,o:86},{n:'Jules Koundé',r:'TD',a:27,v:60000000,o:86},{n:'Alejandro Balde',r:'TS',a:22,v:50000000,o:84},{n:'João Cancelo',r:'TD',a:32,v:18000000,o:83},{n:'Pedri',r:'CC',a:23,v:140000000,o:91},{n:'Gavi',r:'CC',a:22,v:90000000,o:87},{n:'Frenkie de Jong',r:'CC',a:29,v:65000000,o:87},{n:'Dani Olmo',r:'COC',a:28,v:60000000,o:86},{n:'Rodri',r:'CDC',a:30,v:90000000,o:90},{n:'Lamine Yamal',r:'AD',a:19,v:200000000,o:93},{n:'Raphinha',r:'AD',a:29,v:90000000,o:89},{n:'Anthony Gordon',r:'AS',a:25,v:70000000,o:85},{n:'Karim Adeyemi',r:'AS',a:24,v:60000000,o:84}],
+ man_city:[{n:'Rúben Dias',r:'DC',a:29,v:65000000,o:87},{n:'Marc Guéhi',r:'DC',a:26,v:60000000,o:85},{n:'Joško Gvardiol',r:'DC',a:24,v:80000000,o:87},{n:'Abdukodir Khusanov',r:'DC',a:22,v:45000000,o:82},{n:'Elliot Anderson',r:'CC',a:23,v:80000000,o:84},{n:'Phil Foden',r:'COC',a:26,v:110000000,o:89},{n:'Jérémy Doku',r:'AS',a:24,v:70000000,o:85},{n:'Mateo Kovačić',r:'CC',a:32,v:12000000,o:82},{n:'Erling Haaland',r:'ATT',a:26,v:180000000,o:93},{n:'Oscar Bobb',r:'AD',a:23,v:35000000,o:81}],
+ liverpool:[{n:'Alisson Becker',r:'POR',a:33,v:20000000,o:87},{n:'Virgil van Dijk',r:'DC',a:35,v:10000000,o:87},{n:'Joe Gomez',r:'DC',a:29,v:15000000,o:80},{n:'Ronald Araújo',r:'DC',a:27,v:50000000,o:85},{n:'Jérémy Jacquet',r:'DC',a:21,v:30000000,o:79},{n:'Conor Bradley',r:'TD',a:23,v:35000000,o:81},{n:'Dominik Szoboszlai',r:'COC',a:25,v:80000000,o:87},{n:'Florian Wirtz',r:'COC',a:23,v:120000000,o:89},{n:'Curtis Jones',r:'CC',a:25,v:35000000,o:82},{n:'Trey Nyoni',r:'CC',a:19,v:22000000,o:76},{n:'Alexander Isak',r:'ATT',a:26,v:100000000,o:88},{n:'Cody Gakpo',r:'AS',a:27,v:60000000,o:85}],
+ arsenal:[{n:'David Raya',r:'POR',a:30,v:35000000,o:84},{n:'William Saliba',r:'DC',a:25,v:90000000,o:89},{n:'Gabriel Magalhães',r:'DC',a:28,v:70000000,o:87},{n:'Jurriën Timber',r:'TD',a:25,v:55000000,o:85},{n:'Riccardo Calafiori',r:'TS',a:24,v:50000000,o:84},{n:'Declan Rice',r:'CDC',a:27,v:120000000,o:90},{n:'Martin Ødegaard',r:'COC',a:27,v:85000000,o:88},{n:'Bruno Guimarães',r:'CC',a:28,v:90000000,o:88},{n:'Bukayo Saka',r:'AD',a:24,v:140000000,o:91},{n:'Gabriel Martinelli',r:'AS',a:25,v:65000000,o:85}],
+ chelsea:[{n:'Reece James',r:'TD',a:26,v:45000000,o:84},{n:'Levi Colwill',r:'DC',a:23,v:50000000,o:83},{n:'Moisés Caicedo',r:'CDC',a:24,v:100000000,o:88},{n:'Enzo Fernández',r:'CC',a:25,v:90000000,o:87},{n:'Cole Palmer',r:'COC',a:24,v:130000000,o:91},{n:'Pedro Neto',r:'AD',a:26,v:55000000,o:84},{n:'Estêvão',r:'AD',a:19,v:80000000,o:84},{n:'Liam Delap',r:'ATT',a:23,v:45000000,o:82}],
+ bayern:[{n:'Manuel Neuer',r:'POR',a:40,v:3000000,o:84},{n:'Jonas Urbig',r:'POR',a:23,v:15000000,o:79},{n:'Hiroki Ito',r:'DC',a:27,v:25000000,o:82},{n:'Kim Min-Jae',r:'DC',a:29,v:30000000,o:83},{n:'Jonathan Tah',r:'DC',a:30,v:30000000,o:84},{n:'Dayot Upamecano',r:'DC',a:27,v:50000000,o:85},{n:'Alphonso Davies',r:'TS',a:25,v:60000000,o:86},{n:'Konrad Laimer',r:'CC',a:29,v:30000000,o:83},{n:'Joshua Kimmich',r:'CDC',a:31,v:45000000,o:88},{n:'Michael Olise',r:'AD',a:24,v:100000000,o:89},{n:'Jamal Musiala',r:'COC',a:23,v:140000000,o:91},{n:'Aleksandar Pavlović',r:'CDC',a:22,v:45000000,o:83},{n:'Harry Kane',r:'ATT',a:33,v:65000000,o:91},{n:'Serge Gnabry',r:'AD',a:31,v:22000000,o:83},{n:'Luis Díaz',r:'AS',a:29,v:70000000,o:86}],
+ psg:[{n:'Lucas Chevalier',r:'POR',a:24,v:45000000,o:84},{n:'Achraf Hakimi',r:'TD',a:27,v:80000000,o:88},{n:'Marquinhos',r:'DC',a:32,v:25000000,o:85},{n:'Willian Pacho',r:'DC',a:24,v:55000000,o:85},{n:'Nuno Mendes',r:'TS',a:24,v:80000000,o:88},{n:'Vitinha',r:'CC',a:26,v:100000000,o:89},{n:'João Neves',r:'CC',a:21,v:110000000,o:89},{n:'Warren Zaïre-Emery',r:'CC',a:20,v:75000000,o:85},{n:'Khvicha Kvaratskhelia',r:'AS',a:25,v:100000000,o:89},{n:'Désiré Doué',r:'AD',a:21,v:100000000,o:89},{n:'Ousmane Dembélé',r:'AD',a:29,v:90000000,o:89},{n:'Ferran Torres',r:'ATT',a:26,v:50000000,o:84}]
+};
+
 function strengthFromMarket(v){const min=64650000,max=711800000;const x=(Math.log(v)-Math.log(min))/(Math.log(max)-Math.log(min));return Math.round(66+24*Math.max(0,Math.min(1,x)))}
 CLUB_IDS.forEach(id=>CLUBS[id].strength=strengthFromMarket(CLUBS[id].market));
 
-function blank(n='Carriera 1'){return{meta:{name:n,created:Date.now(),updated:Date.now()},clubName:'',season:'2026/27',realClubId:'',clubProfile:null,revenues:{tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0},costs:{playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0},finance:{cash:0,debt:0,finAssets:0,equity:0},squad:[],market:[],history:[],league:null}}
+function blank(n='Carriera 1'){return{meta:{name:n,created:Date.now(),updated:Date.now()},clubName:'',season:'2026/27',realClubId:'',clubProfile:null,revenues:{tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0},costs:{playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0},finance:{cash:0,debt:0,finAssets:0,equity:0},squad:[],market:[],history:[],league:null,game:{board:70,fans:70,managerPts:0,events:[],achievements:[],financialTargets:null}}}
 function allSaves(){try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch{return{}}}function putAll(x){localStorage.setItem(SK,JSON.stringify(x))}function active(){return localStorage.getItem(AK)}
 let saves=allSaves(),id=active();
 if(!Object.keys(saves).length){let st=blank();try{const old=JSON.parse(localStorage.getItem(OLD)||'null');if(old){st={...st,...old,meta:{name:'Carriera importata',created:Date.now(),updated:Date.now()},history:[]}}}catch{}id='s'+Date.now();saves[id]=st;putAll(saves);localStorage.setItem(AK,id)}
 if(!id||!saves[id]){id=Object.keys(saves)[0];localStorage.setItem(AK,id)}let state=saves[id];
 
+function overallFromValue(v,a=25){v=+v||0;let o=v>=150000000?93:v>=120000000?91:v>=90000000?89:v>=70000000?87:v>=50000000?85:v>=35000000?83:v>=25000000?81:v>=15000000?78:v>=8000000?75:v>=4000000?72:v>=1000000?68:64;if(a&&a<20)o-=2;else if(a&&a<22)o-=1;return Math.max(55,Math.min(95,o))}
+
+function round500k(x){return Math.round((+x||0)/500000)*500000}
+function estimatedHistoricCost(v,a=25){
+ v=+v||0;
+ let factor=a<=21?0.62:a<=24?0.72:a<=28?0.78:a<=31?0.66:0.42;
+ return Math.max(0,round500k(v*factor));
+}
+function estimatedPlayerWage(v,o,a=25){
+ v=+v||0;o=+o||overallFromValue(v,a);
+ let annual=Math.max(350000,v*0.045+(o-70)*110000);
+ if(a<=21)annual*=0.72;
+ if(a>=32)annual*=0.82;
+ return Math.max(250000,Math.min(16000000,round500k(annual)));
+}
 function ensureState(){
  state.meta=state.meta||{name:'Carriera',created:Date.now(),updated:Date.now()};
  state.revenues={tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0,...(state.revenues||{})};
  state.costs={playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0,...(state.costs||{})};
  state.finance={cash:0,debt:0,finAssets:0,equity:0,...(state.finance||{})};
  state.squad=state.squad||[];state.market=state.market||[];state.history=state.history||[];
- state.realClubId=state.realClubId||'';state.clubProfile=state.clubProfile||null;
+ state.realClubId=state.realClubId||'';state.clubProfile=state.clubProfile||null;state.costMode=state.costMode||'detailed';
+ state.game=state.game||{board:70,fans:70,managerPts:0,events:[],achievements:[]};state.game.board=Math.max(0,Math.min(100,+state.game.board||70));state.game.fans=Math.max(0,Math.min(100,+state.game.fans||70));state.game.managerPts=Math.max(0,+state.game.managerPts||0);state.game.events=state.game.events||[];state.game.achievements=state.game.achievements||[];if(state.game.financialTargets===undefined)state.game.financialTargets=null;
+ state.squad.forEach(p=>{
+   if(!p.overall)p.overall=overallFromValue(p.value,p.age);
+   if(p.wageShare===undefined)p.wageShare=100;
+   if(p.owned===undefined)p.owned=!p.onLoanIn;
+   if(p.costUserEdited===undefined)p.costUserEdited=(p.costEstimated===false);
+   if(p.wageUserEdited===undefined)p.wageUserEdited=(p.wageEstimated===false);
+   if(p.realSeed && !p.costUserEdited && p.costEstimated!==false && (!p.cost || p.cost===0) && (!p.bookValue || p.bookValue===0)){
+     p.cost=estimatedHistoricCost(p.value,p.age);p.years=4;p.done=1;p.bookValue=null;p.costEstimated=true;
+   }
+   if(p.realSeed && !p.wageUserEdited && p.wageEstimated!==false && (!p.wage || p.wage===0)){
+     p.wage=estimatedPlayerWage(p.value,p.overall,p.age);p.wageEstimated=true;
+   }
+   if(!p.bookMode){
+     const exactInitial=(+p.done||0)===0&&Math.abs((+p.bookValue||0)-(+p.cost||0))<1;
+     p.bookMode=(p.bookValue===null||p.bookValue===undefined||exactInitial)?'auto':'manual';
+   }
+ });
  if(state.league && (!state.league.schedule||!state.league.table)) state.league=null;
 }
 ensureState();
 
-function eur(v){return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Number(v)||0)}function n(x){return Number($(x).value)||0}function say(t){const e=$('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
-function save(){state.meta.updated=Date.now();saves=allSaves();saves[id]=state;putAll(saves);$('saveState').textContent='Salvato';setTimeout(()=>$('saveState').textContent='Autosalvataggio attivo',800)}
-function playerBook(p){if(p.bookValue!==undefined&&p.bookValue!==null&&p.bookValue!=='')return Math.max(0,+p.bookValue||0);return Math.max(0,(+p.cost||0)-((+p.cost||0)/Math.max(1,+p.years||1))*(+p.done||0))}
-function playerAmort(p){const remaining=Math.max(1,(+p.years||1)-(+p.done||0));if(p.bookValue!==undefined&&p.bookValue!==null&&p.bookValue!=='')return playerBook(p)/remaining;return (+p.cost||0)/Math.max(1,+p.years||1)}
-function calc(){const rev=Object.values(state.revenues).reduce((a,b)=>a+(+b||0),0);const fixedKeys=['staff','facilities','agents','admin','otherCosts','interest'];const fixed=fixedKeys.reduce((a,k)=>a+(+state.costs[k]||0),0);const detailWages=state.squad.reduce((a,p)=>a+(+p.wage||0),0),detailAmort=state.squad.reduce((a,p)=>a+playerAmort(p),0);const wages=(+state.costs.playerPayroll||0)>0?(+state.costs.playerPayroll||0):detailWages;const amort=(+state.costs.playerAmort||0)>0?(+state.costs.playerAmort||0):detailAmort;const market=state.market.reduce((a,m)=>a+(+m.pl||0),0),cost=fixed+wages+amort,net=rev-cost+market,book=state.squad.reduce((a,p)=>a+playerBook(p),0),netDebt=(+state.finance.debt||0)-(+state.finance.cash||0)-(+state.finance.finAssets||0);return{rev,fixed,wages,amort,market,cost,net,book,netDebt,detailWages,detailAmort}}
+function eur(v){return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(Number(v)||0)}function n(x){return parseMoneyInput($(x)?.value,0)}function say(t){const e=$('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
+function save(){
+ try{
+   ensureState();state.meta.updated=Date.now();
+   const a=allSaves();a[id]=JSON.parse(JSON.stringify(state));putAll(a);saves=a;
+   return true;
+ }catch(e){console.error('Errore salvataggio',e);return false}
+}
+function playerBook(p){
+ if(p.onLoanIn&&!p.owned)return 0;
+ if((p.bookMode||'auto')==='manual'&&p.bookValue!==undefined&&p.bookValue!==null&&p.bookValue!=='')return Math.max(0,+p.bookValue||0);
+ const cost=Math.max(0,+p.cost||0),years=Math.max(1,+p.years||1),done=Math.max(0,Math.min(years,+p.done||0));
+ return Math.max(0,cost-(cost/years)*done);
+}
+function playerAmort(p){
+ if(p.onLoanIn&&!p.owned)return 0;
+ const book=playerBook(p),years=Math.max(1,+p.years||1),done=Math.max(0,Math.min(years,+p.done||0)),remaining=years-done;
+ if(remaining<=0||book<=0)return 0;
+ return book/remaining;
+}
+function playerWageCost(p){const w=+p.wage||0;const share=Math.max(0,Math.min(100,p.wageShare===undefined?100:+p.wageShare||0));return w*share/100}
+function activeSquad(){return state.squad.filter(p=>!p.loanedOut)}
+function squadOverall(){const vals=activeSquad().map(p=>+p.overall||overallFromValue(p.value,p.age)).sort((a,b)=>b-a).slice(0,18);if(vals.length<5)return state.clubProfile?.strength||70;return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length)}
+function refreshStrengthFromSquad(){const s=Math.max(50,Math.min(99,squadOverall()));if(state.clubProfile)state.clubProfile.strength=s;if(state.league)state.league.userStrength=s}
+function marketClubName(cid){if(CLUBS[cid])return CLUBS[cid].name;if(FOREIGN_CLUBS[cid])return FOREIGN_CLUBS[cid].name;return cid==='custom'?'Altro club':''}
+function marketClubCountry(cid){if(CLUBS[cid])return 'Italia';if(FOREIGN_CLUBS[cid])return FOREIGN_CLUBS[cid].country;return ''}
+function marketPlayers(cid){return PLAYER_DB[cid]||FOREIGN_DB[cid]||[]}
+function calc(){const rev=Object.values(state.revenues).reduce((a,b)=>a+(+b||0),0);const fixedKeys=['staff','facilities','agents','admin','otherCosts','interest'];const fixed=fixedKeys.reduce((a,k)=>a+(+state.costs[k]||0),0);const detailWages=state.squad.reduce((a,p)=>a+playerWageCost(p),0),detailAmort=state.squad.reduce((a,p)=>a+playerAmort(p),0);const extraWages=state.squad.filter(p=>!p.realSeed).reduce((a,p)=>a+playerWageCost(p),0),extraAmort=state.squad.filter(p=>!p.realSeed).reduce((a,p)=>a+playerAmort(p),0);let wages,amort;if((state.costMode||'detailed')==='aggregate'){wages=(+state.costs.playerPayroll||0)+extraWages;amort=(+state.costs.playerAmort||0)+extraAmort}else{wages=detailWages;amort=detailAmort}const market=state.market.filter(m=>!m.season||m.season===state.season).reduce((a,m)=>a+(+m.pl||0),0),cost=fixed+wages+amort,net=rev-cost+market,book=state.squad.reduce((a,p)=>a+playerBook(p),0),netDebt=(+state.finance.debt||0)-(+state.finance.cash||0)-(+state.finance.finAssets||0);return{rev,fixed,wages,amort,market,cost,net,book,netDebt,detailWages,detailAmort,extraWages,extraAmort}}
 
 function populateClubSelect(){const s=$('realClubSelect');s.innerHTML='<option value="">Seleziona una squadra</option>'+CLUB_IDS.sort((a,b)=>CLUBS[a].name.localeCompare(CLUBS[b].name,'it')).map(id=>`<option value="${id}">${CLUBS[id].name}</option>`).join('');if(state.realClubId)s.value=state.realClubId}
 function estimatedEconomics(c){const total=Math.max(55000000,Math.min(520000000,c.market*.67));const uefa=c.europe==='UCL'?35000000:c.europe==='UEL'?15000000:c.europe==='UECL'?8000000:0;const base=Math.max(0,total-uefa);const rev={tv:base*.36,sponsor:base*.29,stadium:base*.12,uefa,merch:base*.08,otherRev:base*.15};const costs={playerPayroll:total*.45,playerAmort:total*.18,staff:total*.07,facilities:total*.045,agents:total*.025,admin:total*.035,otherCosts:total*.16,interest:total*.02};return{rev,costs}}
-function seedRealRoster(cid){return (PLAYER_DB[cid]||[]).map((p,i)=>({id:Date.now()+i,name:p.n,role:p.r,age:p.a,cost:0,years:3,done:0,bookValue:0,wage:0,expiry:'',value:p.v||0,realSeed:true,sourceClub:cid}))}
-function loadRealClub(withEstimates){const cid=$('realClubSelect').value;if(!cid)return say('Seleziona una squadra');const c=CLUBS[cid],roster=PLAYER_DB[cid]||[];if(!confirm(`Caricare ${c.name}? Verranno sostituiti i dati del club, il mercato e il campionato. Verrà caricata anche una selezione di ${roster.length} giocatori reali della rosa; i dati contabili dei singoli giocatori resteranno da compilare.`))return;state.realClubId=cid;state.clubName=c.name;state.season='2026/27';state.clubProfile={market:c.market,players:c.players,age:c.age,strength:c.strength,sourceDate:'18/08/2026'};state.squad=seedRealRoster(cid);state.market=[];state.league=null;state.finance={cash:c.cash??0,debt:c.debt??0,finAssets:0,equity:0};if(withEstimates){const est=estimatedEconomics(c);state.revenues=Object.fromEntries(Object.entries(est.rev).map(([k,v])=>[k,Math.round(v)]));state.costs=Object.fromEntries(Object.entries(est.costs).map(([k,v])=>[k,Math.round(v)]))}else{state.revenues={tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0};state.costs={playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0}}save();initInputs();render();say(withEstimates?'Dati reali + rosa + stime caricati':'Dati reali + rosa caricati')}
+function seedRealRoster(cid){return (PLAYER_DB[cid]||[]).map((p,i)=>{const overall=p.o||overallFromValue(p.v,p.a),cost=p.c!==undefined?p.c:estimatedHistoricCost(p.v,p.a),wage=p.w!==undefined?p.w:estimatedPlayerWage(p.v,overall,p.a);return{id:Date.now()+i,name:p.n,role:p.r,age:p.a,cost,years:p.years||4,done:p.done!==undefined?p.done:1,bookValue:p.book!==undefined?p.book:null,wage,expiry:p.expiry||'',value:p.v||0,overall,realSeed:true,sourceClub:cid,owned:true,wageShare:100,costEstimated:p.c===undefined,wageEstimated:p.w===undefined,costUserEdited:false,wageUserEdited:false,bookMode:p.book!==undefined?'manual':'auto'}})}
+function loadRealClub(withEstimates){const cid=$('realClubSelect').value;if(!cid)return say('Seleziona una squadra');const c=CLUBS[cid],roster=PLAYER_DB[cid]||[];if(!confirm(`Caricare ${c.name}? Verranno sostituiti i dati del club, il mercato e il campionato. Verrà caricata anche una selezione di ${roster.length} giocatori reali della rosa; i dati contabili dei singoli giocatori saranno precompilati con stime modificabili.`))return;state.realClubId=cid;state.clubName=c.name;state.season='2026/27';state.costMode='detailed';state.clubProfile={market:c.market,players:c.players,age:c.age,strength:c.strength,sourceDate:'18/08/2026'};state.squad=seedRealRoster(cid);state.market=[];state.league=null;state.game={board:70,fans:70,managerPts:0,events:[],achievements:[],financialTargets:null};addClubEvent(`Hai iniziato la carriera alla guida di ${c.name}.`,'info');state.finance={cash:c.cash??0,debt:c.debt??0,finAssets:0,equity:0};if(withEstimates){const est=estimatedEconomics(c);state.revenues=Object.fromEntries(Object.entries(est.rev).map(([k,v])=>[k,Math.round(v)]));state.costs=Object.fromEntries(Object.entries(est.costs).map(([k,v])=>[k,Math.round(v)]))}else{state.revenues={tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0};state.costs={playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0}}ensureFinancialTargets(true);save();window.addEventListener('beforeunload',()=>{try{save()}catch(e){}});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){try{save()}catch(e){}}});
+initInputs();['buyPrice','buyYears','buyWage','buyOverall','buyMarketValue','buyAge','buyPlayerText','buyClubText'].forEach(x=>{if($(x))$(x).addEventListener('input',previewBuyPlayer)});['editCost','editYears','editDone','editBook','editWage','editWageShare'].forEach(x=>{if($(x))$(x).addEventListener('input',updateEditPreview)});render();say(withEstimates?'Dati reali + rosa + stime caricati':'Dati reali + rosa caricati')}
 
-function initInputs(){populateClubSelect();populateBuyClubs();populateBuyPlayers();$('clubName').value=state.clubName;$('season').value=state.season;$('saveName').value=state.meta.name;for(const k in state.revenues)if($(k))$(k).value=state.revenues[k];for(const k in state.costs)if($(k))$(k).value=state.costs[k];for(const k in state.finance)if($(k))$(k).value=state.finance[k];$('clubName').oninput=()=>{state.clubName=$('clubName').value;save();render()};$('season').oninput=()=>{state.season=$('season').value;save();render()};$('saveName').oninput=()=>{state.meta.name=$('saveName').value;save()};Object.keys(state.revenues).forEach(k=>{if($(k))$(k).oninput=e=>{state.revenues[k]=+e.target.value||0;save();render()}});Object.keys(state.costs).forEach(k=>{if($(k))$(k).oninput=e=>{state.costs[k]=+e.target.value||0;save();render()}});Object.keys(state.finance).forEach(k=>{if($(k))$(k).oninput=e=>{state.finance[k]=+e.target.value||0;save();render()}});$('leagueStrength').onchange=e=>{if(!state.league)return;state.league.userStrength=Math.max(50,Math.min(99,+e.target.value||70));save();renderLeague()}}
+function initInputs(){populateClubSelect();populateBuyClubs();setupLoanControls();$('clubName').value=state.clubName;$('season').value=state.season;$('saveName').value=state.meta.name;for(const k in state.revenues)if($(k))$(k).value=state.revenues[k];for(const k in state.costs)if($(k))$(k).value=state.costs[k];for(const k in state.finance)if($(k))$(k).value=state.finance[k];if($('costMode'))$('costMode').value=state.costMode||'detailed';if($('costMode'))$('costMode').onchange=e=>{state.costMode=e.target.value;save();render()};$('clubName').oninput=()=>{state.clubName=$('clubName').value;save();render()};$('season').oninput=()=>{state.season=$('season').value;save();render()};$('saveName').oninput=()=>{state.meta.name=$('saveName').value;save()};Object.keys(state.revenues).forEach(k=>{if($(k))$(k).oninput=e=>{state.revenues[k]=parseMoneyInput(e.target.value,0);save();render()}});Object.keys(state.costs).forEach(k=>{if($(k))$(k).oninput=e=>{state.costs[k]=parseMoneyInput(e.target.value,0);save();render()}});Object.keys(state.finance).forEach(k=>{if($(k))$(k).oninput=e=>{state.finance[k]=parseMoneyInput(e.target.value,0);save();render()}});$('leagueStrength').onchange=e=>{if(!state.league)return;state.league.userStrength=Math.max(50,Math.min(99,+e.target.value||70));save();renderLeague()};['salePlayer','salePrice'].forEach(x=>{if($(x))$(x).oninput=previewSale});['loanFee','loanBuyout','loanWageShare','loanWage'].forEach(x=>{if($(x))$(x).oninput=previewLoan});refreshMoneyFormatting()}
 
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.t).classList.add('active');if(b.dataset.t==='league')renderLeague()});
 
-function populateBuyClubs(){const s=$('buyClub');if(!s)return;s.innerHTML='<option value="">Seleziona squadra</option>'+CLUB_IDS.sort((a,b)=>CLUBS[a].name.localeCompare(CLUBS[b].name,'it')).map(cid=>`<option value="${cid}">${CLUBS[cid].name}</option>`).join('');if(state.realClubId&&s.value===state.realClubId)s.value=''}
-function populateBuyPlayers(){const cid=$('buyClub').value,s=$('buyPlayer');if(!s)return;const arr=(PLAYER_DB[cid]||[]).filter(p=>!state.squad.some(x=>x.name===p.n));s.innerHTML='<option value="">Seleziona giocatore</option>'+arr.map((p,i)=>`<option value="${i}">${p.n} · ${p.r}</option>`).join('');$('buyMarketValue').value='';$('buyPreview').textContent=arr.length?'Scegli un giocatore.':'Nessun giocatore disponibile nel database per questa squadra.'}
-function selectedBuyPlayer(){const cid=$('buyClub').value,idx=+$('buyPlayer').value;if(!$('buyPlayer').value)return null;const arr=(PLAYER_DB[cid]||[]).filter(p=>!state.squad.some(x=>x.name===p.n));return arr[idx]||null}
-function previewBuyPlayer(){const p=selectedBuyPlayer();if(!p){$('buyMarketValue').value='';$('buyPreview').textContent='Seleziona un giocatore.';return}$('buyMarketValue').value=p.v||0;$('buyPrice').value=p.v||0;$('buyPreview').innerHTML=`<b>${p.n}</b> · ${p.r} · ${p.a} anni · valore di mercato indicativo ${eur(p.v||0)}. Il prezzo di acquisto può essere modificato liberamente.`}
-function refreshProfileAfterTransfer(delta){if(!state.clubProfile)return;state.clubProfile.market=Math.max(0,(+state.clubProfile.market||0)+delta);state.clubProfile.strength=strengthFromMarket(Math.max(64650000,state.clubProfile.market||64650000));if(state.league)state.league.userStrength=state.clubProfile.strength}
-function buyPlayer(){const cid=$('buyClub').value,p=selectedBuyPlayer();if(!cid||!p)return say('Seleziona squadra e giocatore');if(state.realClubId===cid&&!confirm(`${p.n} risulta già nella squadra da cui stai gestendo la carriera. Vuoi registrarlo comunque come nuovo acquisto?`))return;const price=n('buyPrice'),years=Math.max(1,n('buyYears')||5),wage=n('buyWage'),upRaw=$('buyUpfront').value.trim(),upfront=upRaw===''?price:Math.max(0,Number(upRaw)||0),expiry=$('buyExpiry').value.trim();if(state.squad.some(x=>x.name===p.n))return say('Il giocatore è già nella tua rosa');state.squad.push({id:Date.now(),name:p.n,role:p.r,age:p.a,cost:price,years,done:0,bookValue:price,wage,expiry,value:p.v||0,sourceClub:cid,realSeed:false});state.market.push({id:Date.now()+1,type:'Acquisto',player:p.n,from:CLUBS[cid].name,amount:price,book:price,pl:0,season:state.season});state.finance.cash=(+state.finance.cash||0)-upfront;refreshProfileAfterTransfer(p.v||0);$('buyPrice').value=$('buyWage').value=$('buyUpfront').value=$('buyExpiry').value='';$('buyYears').value=5;save();populateBuyPlayers();render();say('Acquisto registrato')}
+function allMarketClubs(){
+ const list=[];
+ CLUB_IDS.forEach(cid=>list.push({id:cid,name:CLUBS[cid].name,country:'Italia',players:PLAYER_DB[cid]||[]}));
+ Object.keys(FOREIGN_CLUBS).forEach(cid=>list.push({id:cid,name:FOREIGN_CLUBS[cid].name,country:FOREIGN_CLUBS[cid].country,players:FOREIGN_DB[cid]||[]}));
+ return list;
+}
+let matchedBuyClubId='';
+let matchedBuyPlayer=null;
 
-function addPlayer(){const name=$('pName').value.trim();if(!name)return say('Inserisci il nome');const cost=n('pCost'),years=Math.max(1,n('pYears')||1),done=n('pDone'),bookRaw=$('pBook').value.trim(),bookValue=bookRaw===''?null:Math.max(0,Number(bookRaw)||0);state.squad.push({id:Date.now(),name,role:$('pRole').value,age:n('pAge'),cost,years,done,bookValue,wage:n('pWage'),expiry:$('pExpiry').value.trim(),value:n('pValue')});$('pName').value=$('pAge').value=$('pCost').value=$('pWage').value=$('pExpiry').value=$('pBook').value=$('pValue').value='';$('pYears').value=5;$('pDone').value=0;save();render();say('Giocatore aggiunto')}
-function editP(pid){const p=state.squad.find(x=>x.id===pid);if(!p)return;let b=prompt('Valore residuo a bilancio:',playerBook(p));if(b!==null)p.bookValue=Math.max(0,Number(b)||0);let y=prompt('Anni residui su cui ammortizzare:',Math.max(1,(+p.years||1)-(+p.done||0)));if(y!==null){p.years=Math.max(1,Number(y)||1);p.done=0}let w=prompt('Stipendio lordo annuo:',p.wage||0);if(w!==null)p.wage=Math.max(0,Number(w)||0);let v=prompt('Valore di mercato:',p.value||0);if(v!==null)p.value=Math.max(0,Number(v)||0);let e=prompt('Scadenza contratto:',p.expiry||'');if(e!==null)p.expiry=e;save();render();say('Dati giocatore aggiornati')}
-function removeP(pid){if(!confirm('Rimuovere il giocatore senza registrare una cessione?'))return;state.squad=state.squad.filter(p=>p.id!==pid);save();render()}
-function renew(pid){const p=state.squad.find(x=>x.id===pid);if(!p)return;const currentBook=playerBook(p);let y=prompt('Nuova durata contratto (anni):',p.years);if(y===null)return;p.bookValue=currentBook;p.years=Math.max((+p.done||0)+1,+y||p.years);let w=prompt('Nuovo stipendio lordo annuo:',p.wage);if(w!==null)p.wage=+w||0;let e=prompt('Nuova scadenza:',p.expiry||'');if(e!==null)p.expiry=e;save();render();say('Contratto aggiornato')}
-function sellPlayer(){const pid=+$('salePlayer').value,p=state.squad.find(x=>x.id===pid);if(!p)return say('Seleziona un giocatore');const price=n('salePrice'),book=playerBook(p),pl=price-book;state.market.push({id:Date.now(),type:'Cessione',player:p.name,amount:price,book,pl,season:state.season});state.squad=state.squad.filter(x=>x.id!==pid);state.finance.cash=(+state.finance.cash||0)+price;refreshProfileAfterTransfer(-(+p.value||0));$('salePrice').value='';save();populateBuyPlayers();render();say('Cessione registrata')}
-function loan(){const pid=+$('loanPlayer').value,p=state.squad.find(x=>x.id===pid);if(!p)return say('Seleziona un giocatore');const fee=n('loanFee'),out=$('loanType').value==='out',pl=out?fee:-fee;state.market.push({id:Date.now(),type:out?'Prestito uscita':'Prestito entrata',player:p.name,amount:fee,book:0,pl,season:state.season});state.finance.cash=(+state.finance.cash||0)+pl;$('loanFee').value='';save();render();say('Prestito registrato')}
+function populateBuyClubs(){
+ const dl=$('clubSuggestions');if(!dl)return;
+ dl.innerHTML=allMarketClubs().sort((a,b)=>a.name.localeCompare(b.name,'it')).map(c=>`<option value="${c.name}">${c.country}</option>`).join('');
+ populatePlayerSuggestions('');
+}
+function populatePlayerSuggestions(cid){
+ const dl=$('playerSuggestions');if(!dl)return;
+ let players=[];
+ if(cid) players=marketPlayers(cid);
+ else{
+   const seen=new Set();
+   allMarketClubs().forEach(c=>(c.players||[]).forEach(p=>{
+     const k=p.n.toLowerCase();
+     if(!seen.has(k)){seen.add(k);players.push({...p,_club:c.name,_country:c.country,_cid:c.id})}
+   }));
+ }
+ dl.innerHTML=players.slice().sort((a,b)=>a.n.localeCompare(b.n,'it')).map(p=>`<option value="${p.n}">${p.r||''}${p._club?' · '+p._club:''}</option>`).join('');
+}
+function matchBuyClub(){
+ const text=$('buyClubText').value.trim().toLowerCase();
+ const club=allMarketClubs().find(c=>c.name.toLowerCase()===text);
+ matchedBuyClubId=club?club.id:'';
+ if(club){
+   $('buyCountry').value=club.country||'';
+   populatePlayerSuggestions(club.id);
+ }else populatePlayerSuggestions('');
+ matchedBuyPlayer=null;
+ previewBuyPlayer();
+}
+function findPlayerAnywhere(name){
+ const t=(name||'').trim().toLowerCase();if(!t)return null;
+ if(matchedBuyClubId){
+   const p=(marketPlayers(matchedBuyClubId)||[]).find(x=>x.n.toLowerCase()===t);
+   if(p)return {...p,_cid:matchedBuyClubId,_club:marketClubName(matchedBuyClubId),_country:marketClubCountry(matchedBuyClubId)};
+ }
+ for(const c of allMarketClubs()){
+   const p=(c.players||[]).find(x=>x.n.toLowerCase()===t);
+   if(p)return {...p,_cid:c.id,_club:c.name,_country:c.country};
+ }
+ return null;
+}
+function matchBuyPlayer(){
+ const name=$('buyPlayerText').value.trim();
+ const p=findPlayerAnywhere(name);
+ matchedBuyPlayer=p||null;
+ if(p){
+   if(!$('buyClubText').value.trim())$('buyClubText').value=p._club||'';
+   if(!$('buyCountry').value.trim())$('buyCountry').value=p._country||'';
+   $('buyRole').value=p.r||'CC';
+   $('buyAge').value=p.a||'';
+   $('buyMarketValue').value=p.v||0;
+   $('buyOverall').value=p.o||overallFromValue(p.v,p.a);
+   if(!$('buyPrice').value)$('buyPrice').value=p.v||0;['buyMarketValue','buyPrice'].forEach(x=>formatMoneyInputElement($(x)));
+ }
+ previewBuyPlayer();
+}
+function selectedBuyPlayer(){
+ const name=$('buyPlayerText').value.trim();if(!name)return null;
+ const p=matchedBuyPlayer||findPlayerAnywhere(name);
+ const value=n('buyMarketValue'),age=n('buyAge');
+ return {
+   n:name,
+   r:$('buyRole').value,
+   a:age,
+   v:value,
+   o:n('buyOverall')||(p?.o)||overallFromValue(value,age),
+   db:p||null
+ };
+}
+function previewBuyPlayer(){
+ const p=selectedBuyPlayer();
+ if(!p){$('buyPreview').textContent='Scrivi il nome di un giocatore oppure selezionalo dai suggerimenti.';return}
+ const years=Math.max(1,n('buyYears')||5),price=n('buyPrice'),wage=n('buyWage'),annual=price/years;
+ const club=$('buyClubText').value.trim()||'club non specificato';
+ $('buyPreview').innerHTML=`<b>${p.n}</b> · ${p.r} · ${p.a||'-'} anni · OVR <b>${p.o}</b> · da <b>${club}</b><br>Costo storico iniziale: <b>${eur(price)}</b> · ammortamento annuo: <b>${eur(annual)}</b> · impatto annuo: <b class="minus">-${eur(annual+wage)}</b> · budget mercato dopo l’operazione: <b class="${marketBudgetFlow().remaining-price>=0?'plus':'minus'}">${eur(marketBudgetFlow().remaining-price)}</b>.`;
+}
+function fillBuyEstimate(){
+ const p=selectedBuyPlayer();
+ const value=n('buyMarketValue'),age=n('buyAge');
+ if(!$('buyOverall').value)$('buyOverall').value=p?.o||overallFromValue(value,age);
+ if(!$('buyPrice').value && value)$('buyPrice').value=estimatedHistoricCost(value,age)||value;
+ if(!$('buyWage').value)$('buyWage').value=estimatedPlayerWage(value,n('buyOverall'),age);['buyMarketValue','buyPrice','buyWage'].forEach(x=>formatMoneyInputElement($(x)));
+ previewBuyPlayer();
+}
+function clearBuyForm(){
+ ['buyClubText','buyPlayerText','buyCountry','buyAge','buyOverall','buyMarketValue','buyPrice','buyWage','buyUpfront','buyExpiry'].forEach(x=>{if($(x))$(x).value=''});
+ $('buyRole').value='CC';$('buyYears').value=5;matchedBuyClubId='';matchedBuyPlayer=null;populatePlayerSuggestions('');previewBuyPlayer();
+}
+function refreshProfileAfterTransfer(delta){if(state.clubProfile)state.clubProfile.market=Math.max(0,(+state.clubProfile.market||0)+delta);refreshStrengthFromSquad()}
+function buyPlayer(){
+ const p=selectedBuyPlayer();if(!p)return say('Scrivi il nome del giocatore');
+ const clubName=$('buyClubText').value.trim()||'Club non specificato';
+ const country=$('buyCountry').value.trim()||'Estero / non specificato';
+ const price=n('buyPrice'),years=Math.max(1,n('buyYears')||5),wage=n('buyWage');
+ const upRaw=$('buyUpfront').value.trim(),upfront=upRaw===''?price:Math.max(0,parseMoneyInput(upRaw,0)),expiry=$('buyExpiry').value.trim();
+ if(state.squad.some(x=>x.name.toLowerCase()===p.n.toLowerCase()))return say('Il giocatore è già nella tua rosa');
+ const value=n('buyMarketValue'),overall=Math.max(1,Math.min(99,n('buyOverall')||overallFromValue(value,p.a)));
+ const player={id:Date.now(),name:p.n,role:p.r,age:p.a,cost:price,years,done:0,bookValue:price,wage,expiry,value,overall,sourceClub:matchedBuyClubId||clubName,realSeed:false,owned:true,wageShare:100,costEstimated:false,wageEstimated:false,costUserEdited:true,wageUserEdited:true,bookMode:'auto'};
+ state.squad.push(player);
+ const annual=playerAmort(player),impact=-(annual+wage);
+ state.market.push({id:Date.now()+1,type:'Acquisto',player:p.n,from:clubName,country,amount:price,book:price,pl:0,balanceImpact:impact,cashImpact:-upfront,annualAmort:annual,annualWage:wage,season:state.season});
+ state.finance.cash=(+state.finance.cash||0)-upfront;
+ refreshProfileAfterTransfer(value);processTransferGame('buy',player,0);updateBudgetBoardReaction();
+ clearBuyForm();save();render();say('Acquisto registrato');
+}
+
+function addPlayer(){const name=$('pName').value.trim();if(!name)return say('Inserisci il nome');const cost=n('pCost'),years=Math.max(1,n('pYears')||1),done=n('pDone'),bookRaw=$('pBook').value.trim(),bookValue=bookRaw===''?null:Math.max(0,parseMoneyInput(bookRaw,0)),value=n('pValue'),age=n('pAge');state.squad.push({id:Date.now(),name,role:$('pRole').value,age,cost,years,done,bookValue,wage:n('pWage'),expiry:$('pExpiry').value.trim(),value,overall:Math.max(1,Math.min(99,n('pOverall')||overallFromValue(value,age))),realSeed:false,owned:true,wageShare:100,costEstimated:false,wageEstimated:false,costUserEdited:true,wageUserEdited:true,bookMode:bookRaw===''?'auto':'manual'});['pName','pAge','pOverall','pCost','pWage','pExpiry','pBook','pValue'].forEach(x=>$(x).value='');$('pYears').value=5;$('pDone').value=0;refreshStrengthFromSquad();save();render();say('Giocatore aggiunto')}
+let editingPlayerId=null;
+function editP(pid,pane='base'){
+ const p=state.squad.find(x=>x.id===pid);if(!p)return;
+ editingPlayerId=pid;$('editPlayerId').value=pid;
+ $('editName').value=p.name||'';$('editRole').value=p.role||'CC';$('editAge').value=p.age??'';
+ $('editOverall').value=p.overall||overallFromValue(p.value,p.age);$('editValue').value=p.value??0;$('editExpiry').value=p.expiry||'';
+ $('editCost').value=p.cost??0;$('editYears').value=Math.max(1,+p.years||1);$('editDone').value=Math.max(0,+p.done||0);
+ $('editWage').value=p.wage??0;$('editWageShare').value=p.wageShare===undefined?100:p.wageShare;
+ $('editBookMode').value=p.bookMode||'auto';$('editBook').value=playerBook(p);if($('editCostSavedInfo'))$('editCostSavedInfo').textContent=`Costo storico attualmente salvato: ${eur(p.cost||0)}`;
+ $('editPlayerSubtitle').textContent='Cambia solo i dati che ti servono';if($('editModalTitle'))$('editModalTitle').textContent=p.name||'Modifica giocatore';
+ showEditPane(pane);refreshMoneyFormatting();updateEditPreview();$('playerEditModal').style.display='block';
+}
+function closePlayerEditor(ev){if(ev&&ev.target&&ev.target.id!=='playerEditModal')return;$('playerEditModal').style.display='none';editingPlayerId=null}
+function parseMoneyInput(raw,def=0){
+ let v=String(raw??'').trim();if(v==='')return def;
+ v=v.replace(/[€\s]/g,'');
+ if(/^-?\d{1,3}(\.\d{3})+(,\d+)?$/.test(v))v=v.replace(/\./g,'').replace(',','.');
+ else if(/^-?\d{1,3}(,\d{3})+(\.\d+)?$/.test(v))v=v.replace(/,/g,'');
+ else if(v.includes(',')&&!v.includes('.'))v=v.replace(',','.');
+ const num=Number(v);return Number.isFinite(num)?num:def;
+}
+function editNum(id,def=0){const el=$(id);if(!el)return def;return parseMoneyInput(el.value,def)}
+
+function formatThousandsIT(value){
+ const num=parseMoneyInput(value,0);
+ if(!Number.isFinite(num))return '';
+ const sign=num<0?'-':'';
+ return sign+String(Math.abs(Math.trunc(num))).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+}
+function formatMoneyInputElement(el){
+ if(!el)return;
+ const raw=String(el.value??'').trim();
+ if(raw==='')return;
+ el.value=formatThousandsIT(raw);
+}
+function normalizeMoneyInputElement(el){
+ if(!el)return;
+ const raw=String(el.value??'').trim();
+ if(raw==='')return;
+ el.value=String(parseMoneyInput(raw,0));
+}
+function moneyFieldIds(){
+ return[
+  'tv','sponsor','stadium','uefa','merch','otherRev',
+  'playerPayroll','playerAmort','staff','facilities','agents','admin','otherCosts','interest',
+  'cash','debt','finAssets','equity',
+  'pCost','pWage','pBook','pValue',
+  'buyMarketValue','buyPrice','buyWage','buyUpfront',
+  'salePrice','loanFee','loanBuyout','loanWage','loanCustomValue',
+  'editValue','editCost','editBook','editWage'
+ ];
+}
+function bindMoneyField(id){
+ const el=$(id);if(!el||el.dataset.moneyBound==='1')return;
+ el.dataset.moneyBound='1';
+ if(el.type==='number')el.type='text';
+ el.setAttribute('inputmode','numeric');
+ el.setAttribute('autocomplete','off');
+ el.addEventListener('focus',()=>normalizeMoneyInputElement(el));
+ el.addEventListener('blur',()=>formatMoneyInputElement(el));
+ formatMoneyInputElement(el);
+}
+function setupMoneyFormatting(){moneyFieldIds().forEach(bindMoneyField)}
+function refreshMoneyFormatting(){
+ setupMoneyFormatting();
+ moneyFieldIds().forEach(id=>{
+   const el=$(id);
+   if(el&&document.activeElement!==el)formatMoneyInputElement(el);
+ });
+}
+
+function updateEditPreview(){
+ if(!editingPlayerId)return;
+ const cost=Math.max(0,editNum('editCost',0)),years=Math.max(1,editNum('editYears',1));
+ let done=Math.max(0,editNum('editDone',0));if(done>years){done=years;$('editDone').value=years}
+ const mode=$('editBookMode')?.value||'auto',autoBook=Math.max(0,cost-(cost/years)*done);
+ if(mode==='auto'){
+   $('editBook').value=autoBook;formatMoneyInputElement($('editBook'));$('editBook').disabled=true;
+   $('editBookHelp').innerHTML=`Automatico: costo ${eur(cost)}, ${done}/${years} anni ammortizzati → residuo <b>${eur(autoBook)}</b>.`;
+ }else{
+   $('editBook').disabled=false;
+   $('editBookHelp').innerHTML='Manuale: il valore residuo rimane quello inserito da te.';
+ }
+ const book=mode==='auto'?autoBook:Math.max(0,editNum('editBook',0)),remaining=Math.max(0,years-done),amort=remaining>0?book/remaining:0;
+ const wage=Math.max(0,editNum('editWage',0)),share=Math.max(0,Math.min(100,editNum('editWageShare',100))),wageCost=wage*share/100;
+ $('editPrevAmort').textContent=eur(amort);$('editPrevWage').textContent=eur(wageCost);$('editPrevTotal').textContent=eur(amort+wageCost);
+}
+function recalcEditBook(){if($('editBookMode'))$('editBookMode').value='auto';updateEditPreview()}
+function savePlayerEditor(){
+ const p=state.squad.find(x=>x.id===editingPlayerId);if(!p)return;
+ const years=Math.max(1,editNum('editYears',p.years||1)),done=Math.max(0,Math.min(years,editNum('editDone',p.done||0))),mode=$('editBookMode')?.value||'auto';
+ p.name=$('editName').value.trim()||p.name;p.role=$('editRole').value||p.role;p.age=Math.max(0,editNum('editAge',p.age||0));
+ p.overall=Math.max(1,Math.min(99,editNum('editOverall',p.overall||70)));p.value=Math.max(0,editNum('editValue',p.value||0));p.expiry=$('editExpiry').value.trim();
+ p.cost=Math.max(0,editNum('editCost',p.cost||0));p.years=years;p.done=done;p.bookMode=mode;
+ p.bookValue=mode==='manual'?Math.max(0,editNum('editBook',playerBook(p))):null;
+ p.wage=Math.max(0,editNum('editWage',p.wage||0));p.wageShare=Math.max(0,Math.min(100,editNum('editWageShare',p.wageShare===undefined?100:p.wageShare)));
+ p.costEstimated=false;p.wageEstimated=false;p.costUserEdited=true;p.wageUserEdited=true;refreshStrengthFromSquad();save();render();$('playerEditModal').style.display='none';editingPlayerId=null;say(`Giocatore aggiornato · costo storico ${eur(p.cost)}`);
+}
+function recalcPlayerBook(pid){const p=state.squad.find(x=>x.id===pid);if(!p)return;p.bookMode='auto';p.bookValue=null;save();render();say('Valore residuo impostato su automatico')}
+function removeP(pid){if(!confirm('Rimuovere il giocatore senza registrare una cessione?'))return;state.squad=state.squad.filter(p=>p.id!==pid);refreshStrengthFromSquad();save();render()}
+function renew(pid){editP(pid,'contract')}
+function previewSale(){const pid=+$('salePlayer').value,p=state.squad.find(x=>x.id===pid);if(!p){$('salePreview').textContent='Seleziona un giocatore.';return}const price=n('salePrice'),book=playerBook(p),pl=price-book,saving=playerAmort(p)+playerWageCost(p);$('salePreview').innerHTML=`Valore residuo <b>${eur(book)}</b> · ${pl>=0?'Plusvalenza':'Minusvalenza'} <b class="${pl>=0?'plus':'minus'}">${eur(pl)}</b> · Risparmio annuo stimato <b>${eur(saving)}</b>.`}
+function sellPlayer(){const pid=+$('salePlayer').value,p=state.squad.find(x=>x.id===pid);if(!p)return say('Seleziona un giocatore');if(p.onLoanIn&&!p.owned)return say('Prima devi riscattare il giocatore');const price=n('salePrice'),book=playerBook(p),pl=price-book,to=$('saleTo').value.trim()||'Club non specificato',country=$('saleCountry').value,saving=playerAmort(p)+playerWageCost(p);state.market.push({id:Date.now(),type:'Cessione',player:p.name,to,country,amount:price,book,pl,balanceImpact:pl,cashImpact:price,annualSaving:saving,season:state.season});state.squad=state.squad.filter(x=>x.id!==pid);state.finance.cash=(+state.finance.cash||0)+price;refreshProfileAfterTransfer(-(+p.value||0));processTransferGame('sell',p,pl);updateBudgetBoardReaction();$('salePrice').value=$('saleTo').value='';save();populatePlayerSuggestions(matchedBuyClubId);render();say('Cessione registrata')}
+
+function marketClubOptions(){const it=CLUB_IDS.slice().sort((a,b)=>CLUBS[a].name.localeCompare(CLUBS[b].name,'it')).map(cid=>`<option value="${cid}">${CLUBS[cid].name}</option>`).join(''),foreign=Object.keys(FOREIGN_CLUBS).sort((a,b)=>FOREIGN_CLUBS[a].name.localeCompare(FOREIGN_CLUBS[b].name,'it')).map(cid=>`<option value="${cid}">${FOREIGN_CLUBS[cid].name} · ${FOREIGN_CLUBS[cid].country}</option>`).join('');return `<option value="">Seleziona club</option><optgroup label="Italia">${it}</optgroup><optgroup label="Estero">${foreign}</optgroup><option value="custom">🌍 Altro club / manuale</option>`}
+function setupLoanControls(){$('loanWage').disabled=$('loanType').value!=='in';populateLoanPlayers()}
+function populateLoanPlayers(){
+ const incoming=$('loanType').value==='in',clubText=$('loanClubText').value.trim(),club=allMarketClubs().find(c=>c.name.toLowerCase()===clubText.toLowerCase()),s=$('loanPlayer');
+ if(!incoming){
+   const arr=state.squad.filter(p=>!p.loanedOut&&!(p.onLoanIn&&!p.owned));
+   s.innerHTML='<option value="">Seleziona giocatore</option>'+arr.map(p=>`<option value="${p.id}">${p.name} · OVR ${p.overall||overallFromValue(p.value,p.age)}</option>`).join('');
+   $('loanCustomFields').style.display='none';
+ }else if(club){
+   const arr=marketPlayers(club.id).filter(p=>!state.squad.some(x=>x.name.toLowerCase()===p.n.toLowerCase()));
+   s.innerHTML='<option value="">Seleziona dal database oppure usa i campi manuali sotto</option>'+arr.map((p,i)=>`<option value="${i}">${p.n} · ${p.r}</option>`).join('');
+   $('loanCustomFields').style.display='block';
+ }else{
+   s.innerHTML='<option value="custom">Inserimento manuale</option>';
+   $('loanCustomFields').style.display='block';
+ }
+ previewLoan();
+}
+function selectedLoanExternal(){const clubText=$('loanClubText').value.trim(),club=allMarketClubs().find(c=>c.name.toLowerCase()===clubText.toLowerCase()),raw=$('loanPlayer').value;if(raw!==''&&raw!=='custom'&&club){const arr=marketPlayers(club.id).filter(p=>!state.squad.some(x=>x.name.toLowerCase()===p.n.toLowerCase()));const p=arr[+raw];if(p)return p}const name=$('loanCustomName').value.trim();if(!name)return null;const a=n('loanCustomAge'),v=n('loanCustomValue');return{n:name,r:$('loanCustomRole').value,a,v,o:n('loanCustomOverall')||overallFromValue(v,a)}}
+function previewLoan(){const incoming=$('loanType').value==='in',fee=n('loanFee'),share=Math.max(0,Math.min(100,n('loanWageShare'))),clause=$('loanClause').value,buyout=n('loanBuyout');let p=incoming?selectedLoanExternal():state.squad.find(x=>x.id===+$('loanPlayer').value);if(!p){$('loanPreview').textContent='Configura il prestito.';return}const wage=incoming?n('loanWage'):(+p.wage||0),clubCost=wage*share/100,feeImpact=incoming?-fee:fee,wageDelta=incoming?-clubCost:((+p.wage||0)-clubCost),impact=feeImpact+wageDelta;$('loanPreview').innerHTML=`<b>${p.n||p.name}</b> · OVR ${p.o||p.overall||overallFromValue(p.v||p.value,p.a||p.age)} · Impatto stimato a bilancio: <b class="${impact>=0?'plus':'minus'}">${eur(impact)}</b>${clause!=='none'?` · ${clause==='option'?'Diritto':'Obbligo'} a <b>${eur(buyout)}</b>`:''}.`}
+function loan(){const incoming=$('loanType').value==='in',clubText=$('loanClubText').value.trim();if(!clubText)return say('Scrivi il club controparte');const clubObj=allMarketClubs().find(c=>c.name.toLowerCase()===clubText.toLowerCase()),cid=clubObj?clubObj.id:clubText;const fee=n('loanFee'),clause=$('loanClause').value,buyout=n('loanBuyout'),share=Math.max(0,Math.min(100,n('loanWageShare'))),buyYears=Math.max(1,n('loanBuyYears')||4),clubName=clubText,country=clubObj?(clubObj.country||''):'Estero / non specificato';if(incoming){const q=selectedLoanExternal();if(!q)return say('Seleziona o inserisci un giocatore');if(state.squad.some(x=>x.name.toLowerCase()===q.n.toLowerCase()))return say('Il giocatore è già nella tua rosa');const wage=n('loanWage'),pid=Date.now();state.squad.push({id:pid,name:q.n,role:q.r,age:q.a,cost:0,years:1,done:0,bookValue:0,wage,expiry:'',value:q.v||0,overall:q.o||overallFromValue(q.v,q.a),realSeed:false,owned:false,onLoanIn:true,loanedOut:false,wageShare:share,sourceClub:cid,bookMode:'auto'});const impact=-fee-playerWageCost(state.squad[state.squad.length-1]);state.market.push({id:Date.now()+1,type:'Prestito entrata',player:q.n,playerId:pid,from:clubName,country,amount:fee,book:0,pl:-fee,balanceImpact:impact,cashImpact:-fee,loanDirection:'in',clause,buyout,buyYears,wageShare:share,status:'pending',season:state.season});state.finance.cash=(+state.finance.cash||0)-fee;refreshProfileAfterTransfer(q.v||0)}else{const p=state.squad.find(x=>x.id===+$('loanPlayer').value);if(!p)return say('Seleziona un giocatore');p.loanedOut=true;p.wageShare=share;const saving=(+p.wage||0)-playerWageCost(p),impact=fee+saving;state.market.push({id:Date.now(),type:'Prestito uscita',player:p.name,playerId:p.id,to:clubName,country,amount:fee,book:playerBook(p),pl:fee,balanceImpact:impact,cashImpact:fee,loanDirection:'out',clause,buyout,buyYears,wageShare:share,status:'pending',season:state.season});state.finance.cash=(+state.finance.cash||0)+fee;refreshStrengthFromSquad()}$('loanFee').value=$('loanBuyout').value=$('loanWage').value='';$('loanClause').value='none';$('loanWageShare').value=100;$('loanBuyYears').value=4;updateBudgetBoardReaction();save();render();setupLoanControls();say('Prestito registrato')}
+function exerciseLoan(mid,automatic=false){const m=state.market.find(x=>x.id===mid);if(!m||m.status!=='pending'||!m.clause||m.clause==='none')return;if(!automatic&&!confirm(`Esercitare il riscatto di ${m.player} per ${eur(m.buyout)}?`))return;if(m.loanDirection==='in'){const p=state.squad.find(x=>x.id===m.playerId);if(!p)return;p.onLoanIn=false;p.owned=true;p.cost=+m.buyout||0;p.costEstimated=false;p.costUserEdited=true;p.bookValue=null;p.bookMode='auto';p.years=Math.max(1,+m.buyYears||4);p.done=0;p.wageShare=100;const annual=playerAmort(p),impact=-(annual+playerWageCost(p));state.finance.cash=(+state.finance.cash||0)-(+m.buyout||0);state.market.push({id:Date.now()+3,type:'Riscatto',player:p.name,from:m.from,amount:+m.buyout||0,book:+m.buyout||0,pl:0,balanceImpact:impact,cashImpact:-(+m.buyout||0),season:state.season})}else{const p=state.squad.find(x=>x.id===m.playerId);if(!p)return;const book=playerBook(p),price=+m.buyout||0,pl=price-book;state.squad=state.squad.filter(x=>x.id!==p.id);state.finance.cash=(+state.finance.cash||0)+price;state.market.push({id:Date.now()+4,type:'Cessione da riscatto',player:p.name,to:m.to,amount:price,book,pl,balanceImpact:pl,cashImpact:price,season:state.season})}m.status='exercised';refreshStrengthFromSquad();updateBudgetBoardReaction(automatic);save();render();if(!automatic)say('Riscatto esercitato')}
+function settleLoansForNewSeason(){const pending=state.market.filter(m=>m.status==='pending'&&(m.loanDirection==='in'||m.loanDirection==='out'));pending.forEach(m=>{if(m.clause==='obligation'){exerciseLoan(m.id,true);return}if(m.loanDirection==='in')state.squad=state.squad.filter(p=>p.id!==m.playerId);else{const p=state.squad.find(x=>x.id===m.playerId);if(p){p.loanedOut=false;p.wageShare=100}}m.status='returned'});refreshStrengthFromSquad()}
+
+
+function clamp100(v){return Math.max(0,Math.min(100,Math.round(+v||0)))}
+function addClubEvent(text,kind='info'){
+ state.game.events.unshift({id:Date.now()+Math.random(),text,kind,date:Date.now(),season:state.season});
+ state.game.events=state.game.events.slice(0,14);
+}
+function unlockAchievement(key,label,pts=25){
+ if(state.game.achievements.some(a=>a.key===key))return false;
+ state.game.achievements.push({key,label,date:Date.now()});state.game.managerPts+=pts;addClubEvent(`Trofeo manager sbloccato: ${label} (+${pts} pt)`,'achievement');return true;
+}
+function managerLevel(){return Math.max(1,Math.floor((+state.game.managerPts||0)/100)+1)}
+function managerTitle(){
+ const l=managerLevel();return l>=6?'Manager élite':l>=5?'Direttore vincente':l>=4?'Manager affermato':l>=3?'Stratega':l>=2?'Manager in crescita':'Esordiente';
+}
+function seasonTargetRank(){
+ const s=squadOverall();return s>=87?4:s>=82?6:s>=77?8:12;
+}
+
+function roundM(v){return Math.round((+v||0)/1000000)*1000000}
+function marketBudgetDefault(){
+ const market=+state.clubProfile?.market||state.squad.reduce((a,p)=>a+(+p.value||0),0);
+ const cash=Math.max(0,+state.finance.cash||0);
+ const trust=(+state.game.board||70)/100;
+ let base=Math.max(10000000,market*.10+cash*.20);
+ base*=.75+trust*.35;
+ return Math.max(5000000,roundM(base));
+}
+function ensureFinancialTargets(force=false){
+ if(!state.game)ensureState();
+ const t=state.game.financialTargets;
+ if(!force&&t&&t.season===state.season)return t;
+ const c=calc(),startingNetDebt=(+state.finance.debt||0)-(+state.finance.cash||0)-(+state.finance.finAssets||0);
+ const previous=state.history.length?state.history[state.history.length-1]:null;
+ const trustFactor=(+state.game.board||70)>=80?1.15:(+state.game.board||70)<50?.85:1;
+ const budget=Math.max(5000000,roundM(marketBudgetDefault()*trustFactor));
+ let netTarget=0;
+ if(previous&&previous.net<0)netTarget=Math.min(0,roundM(previous.net*.35));
+ const ratioTarget=(+state.game.board||70)>=80?.78:.82;
+ const debtTolerance=Math.max(10000000,Math.abs(startingNetDebt)*.10);
+ const maxNetDebt=roundM(Math.max(0,startingNetDebt)+debtTolerance);
+ state.game.financialTargets={
+   season:state.season,
+   marketBudget:budget,
+   minNetResult:netTarget,
+   maxSquadCostRatio:ratioTarget,
+   maxNetDebt,
+   budgetBreached:false,
+   budgetReactionState:'ok',
+   evaluated:false,
+   evaluation:null
+ };
+ addClubEvent(`La società presenta gli obiettivi finanziari: budget mercato ${eur(budget)}.`,'info');
+ return state.game.financialTargets;
+}
+function marketBudgetFlow(){
+ const t=ensureFinancialTargets(),season=state.season;
+ let spent=0,income=0;
+ state.market.filter(m=>!m.season||m.season===season).forEach(m=>{
+   const a=Math.max(0,+m.amount||0);
+   if(['Acquisto','Prestito entrata','Riscatto'].includes(m.type))spent+=a;
+   if(['Cessione','Prestito uscita','Cessione da riscatto'].includes(m.type))income+=a;
+ });
+ const net=spent-income,remaining=(+t.marketBudget||0)-net;
+ return{spent,income,net,remaining,budget:+t.marketBudget||0};
+}
+function financialGoalStates(){
+ const t=ensureFinancialTargets(),c=calc(),fh=financialHealth(c),flow=marketBudgetFlow();
+ const ratio=c.rev>0?(c.wages+c.amort)/c.rev:null;
+ return[
+   {key:'net',label:`Risultato netto ≥ ${eur(t.minNetResult)}`,current:c.net,ok:c.rev>0&&c.net>=t.minNetResult,known:c.rev>0,detail:c.rev>0?`Attuale: ${eur(c.net)}`:'Bilancio non compilato'},
+   {key:'squad',label:`Costo rosa ≤ ${(t.maxSquadCostRatio*100).toFixed(0)}% dei ricavi`,current:ratio,ok:ratio!==null&&ratio<=t.maxSquadCostRatio,known:ratio!==null,detail:ratio!==null?`Attuale: ${(ratio*100).toFixed(1)}%`:'Servono ricavi'},
+   {key:'debt',label:`PFN ≤ ${eur(t.maxNetDebt)}`,current:fh.netDebt,ok:fh.netDebt<=t.maxNetDebt,known:true,detail:`Attuale: ${eur(fh.netDebt)}`},
+   {key:'budget',label:`Rispetta il budget mercato`,current:flow.net,ok:flow.remaining>=0,known:true,detail:flow.remaining>=0?`Residuo: ${eur(flow.remaining)}`:`Sforato di ${eur(Math.abs(flow.remaining))}`}
+ ];
+}
+function updateBudgetBoardReaction(silent=false){
+ const t=ensureFinancialTargets(),flow=marketBudgetFlow(),over=flow.remaining<0;
+ if(over&&t.budgetReactionState!=='over'){
+   t.budgetReactionState='over';t.budgetBreached=true;
+   state.game.board=clamp100(state.game.board-10);state.game.managerPts=Math.max(0,state.game.managerPts-5);
+   addClubEvent(`Budget mercato sforato di ${eur(Math.abs(flow.remaining))}: la dirigenza è contrariata.`,'loss');
+   if(!silent)say('Budget mercato superato: fiducia dirigenza -10');
+ }else if(!over&&t.budgetReactionState==='over'){
+   t.budgetReactionState='ok';
+   state.game.board=clamp100(state.game.board+4);state.game.managerPts+=5;
+   addClubEvent('Sei rientrato nel budget mercato: la dirigenza apprezza il riequilibrio.','market');
+   if(!silent)say('Rientrato nel budget: fiducia dirigenza +4');
+ }
+ return flow;
+}
+function evaluateFinancialSeason(force=false){
+ const t=ensureFinancialTargets(),goals=financialGoalStates();
+ if(t.evaluated&&!force)return t.evaluation;
+ let delta=0,points=0,met=0;
+ goals.forEach(g=>{
+   if(g.ok){delta+=5;points+=10;met++}
+   else{delta-=8}
+ });
+ if(met===goals.length){
+   delta+=5;points+=20;unlockAchievement('perfect_finance_'+state.season,'Bilancio impeccabile',40);
+ }
+ state.game.board=clamp100(state.game.board+delta);
+ state.game.managerPts=Math.max(0,state.game.managerPts+points);
+ t.evaluated=true;t.evaluation={met,total:goals.length,boardDelta:delta,points,date:Date.now()};
+ addClubEvent(`Valutazione finanziaria ${state.season}: ${met}/${goals.length} obiettivi centrati. Fiducia dirigenza ${delta>=0?'+':''}${delta}.`,delta>=0?'achievement':'loss');
+ return t.evaluation;
+}
+function prepareNextSeasonFinancialTargets(){
+ state.game.financialTargets=null;
+ const t=ensureFinancialTargets(true);
+ const trust=state.game.board;
+ if(trust>=80)t.marketBudget=roundM(t.marketBudget*1.12);
+ else if(trust<50)t.marketBudget=Math.max(5000000,roundM(t.marketBudget*.82));
+ return t;
+}
+function renderFinancialTargets(){
+ if(!$('financialObjectives'))return;
+ const t=ensureFinancialTargets(),flow=marketBudgetFlow(),goals=financialGoalStates();
+ $('marketBudgetInitial').textContent=eur(flow.budget);
+ $('marketBudgetSpent').textContent=eur(flow.spent);
+ $('marketBudgetIncome').textContent=eur(flow.income);
+ $('marketBudgetNet').textContent=eur(flow.net);
+ $('marketBudgetRemaining').textContent=eur(flow.remaining);
+ $('marketBudgetRemaining').className='budgetAmount '+(flow.remaining>=0?'plus':'minus');
+ const used=flow.budget>0?Math.max(0,flow.net/flow.budget*100):0;
+ $('marketBudgetBar').style.width=Math.min(100,used)+'%';
+ $('marketBudgetBar').className='budgetProgressFill '+(flow.remaining<0?'over':'');
+ $('marketBudgetStatus').textContent=flow.remaining>=0?'Dentro budget':`Sforato`;
+ $('marketBudgetStatus').className='budgetStatus '+(flow.remaining>=0?'budget-ok':'budget-over');
+ $('budgetBoardReaction').innerHTML=flow.remaining>=0
+   ?`La società è soddisfatta finché la spesa netta resta entro <b>${eur(flow.budget)}</b>. Le cessioni aumentano lo spazio disponibile.`
+   :`Hai superato il limite di <b>${eur(Math.abs(flow.remaining))}</b>. Non sei bloccato, ma la fiducia della dirigenza ne risente.`;
+ $('financialObjectives').innerHTML=goals.slice(0,3).map(g=>{
+   const cls=!g.known?'goal-warn':g.ok?'goal-good':'goal-bad',txt=!g.known?'Da valutare':g.ok?'Rispettato':'Non rispettato';
+   return `<div class="goalItem"><div class="goalHead"><div class="goalName">${g.label}</div><span class="goalState ${cls}">${txt}</span></div><div class="goalValue">${g.detail}</div></div>`;
+ }).join('');
+}
+function managerObjectives(){
+ const target=seasonTargetRank(),leagueStarted=!!state.league,rank=leagueStarted?rankOfUser():null;
+ return[
+   {label:`Raggiungi almeno la top ${target}`,done:state.league?.completed&&rank<=target,detail:leagueStarted?`Posizione attuale: ${rank}°`:'Avvia il campionato'}
+ ];
+}
+function renderManagerGame(){
+ if(!$('boardTrust'))return;
+ const g=state.game,l=managerLevel(),levelProgress=(g.managerPts%100);
+ $('boardTrust').textContent=`${g.board} / 100`;$('fanMood').textContent=`${g.fans} / 100`;$('managerPoints').textContent=`${g.managerPts} pt`;
+ $('boardBar').style.width=g.board+'%';$('fanBar').style.width=g.fans+'%';$('managerBar').style.width=levelProgress+'%';
+ $('managerLevelBadge').textContent=`Livello ${l} · ${managerTitle()}`;
+ $('managerObjectives').innerHTML=managerObjectives().map(o=>`<div class="objective"><div><b>${o.label}</b><div class="muted">${o.detail}</div></div><span class="objectiveStatus ${o.done?'done':''}">${o.done?'Completato':'In corso'}</span></div>`).join('');
+ $('achievementRow').innerHTML=state.game.achievements.length?state.game.achievements.slice(-6).map(a=>`<span class="achievement">🏆 ${a.label}</span>`).join(''):'<span class="muted">Nessun trofeo manager sbloccato.</span>';
+ renderFinancialTargets();
+ $('clubEventFeed').innerHTML=state.game.events.length?state.game.events.map(e=>`<div class="eventItem">${e.kind==='achievement'?'🏆 ':e.kind==='win'?'✅ ':e.kind==='loss'?'❌ ':e.kind==='market'?'💼 ':'📰 '}${e.text}<small>${e.season||state.season}</small></div>`).join(''):'<div class="empty">Le notizie della carriera compariranno qui.</div>';
+}
+function processTransferGame(kind,p,pl=0){
+ ensureState();
+ if(kind==='buy'){
+   const o=+p.overall||0;
+   state.game.board=clamp100(state.game.board+(o>=85?1:0));state.game.fans=clamp100(state.game.fans+(o>=85?4:o>=80?2:1));state.game.managerPts+=o>=85?12:5;
+   addClubEvent(`Acquistato ${p.name}${o?' (OVR '+o+')':''}.`,'market');
+   if(o>=88)unlockAchievement('star_signing','Colpo da copertina',30);
+ }else{
+   state.game.board=clamp100(state.game.board+(pl>=10000000?4:pl>=0?2:-3));state.game.fans=clamp100(state.game.fans-((+p.overall||0)>=85?3:0));state.game.managerPts+=pl>=0?8:2;
+   addClubEvent(`Ceduto ${p.name}: ${pl>=0?'plusvalenza':'minusvalenza'} ${eur(pl)}.`,'market');
+   if(pl>=10000000)unlockAchievement('big_profit','Maestro delle plusvalenze',30);
+ }
+}
+function processGameRound(roundIndex){
+ if(!state.league||!state.realClubId)return;
+ const m=(state.league.schedule[roundIndex]||[]).find(x=>x.home===state.realClubId||x.away===state.realClubId);if(!m||!m.played)return;
+ const home=m.home===state.realClubId,ug=home?m.hg:m.ag,og=home?m.ag:m.hg,opp=CLUBS[home?m.away:m.home].name;
+ if(ug>og){state.game.board=clamp100(state.game.board+4);state.game.fans=clamp100(state.game.fans+5);state.game.managerPts+=20;addClubEvent(`Vittoria ${ug}-${og} contro ${opp}.`,'win')}
+ else if(ug===og){state.game.board=clamp100(state.game.board+1);state.game.fans=clamp100(state.game.fans+1);state.game.managerPts+=8;addClubEvent(`Pareggio ${ug}-${og} contro ${opp}.`,'info')}
+ else{state.game.board=clamp100(state.game.board-4);state.game.fans=clamp100(state.game.fans-5);state.game.managerPts+=2;addClubEvent(`Sconfitta ${ug}-${og} contro ${opp}.`,'loss')}
+ const me=state.league.table[state.realClubId];
+ if(me.w>=1)unlockAchievement('first_win','Prima vittoria',20);
+ if(me.w>=5)unlockAchievement('five_wins','Cinque vittorie',25);
+ if(me.w>=10)unlockAchievement('ten_wins','Dieci vittorie',35);
+ const r=mulberry32((state.league.seed+roundIndex*17713+991)>>>0)();
+ if(r<.035&&state.squad.length){
+   const young=state.squad.filter(p=>(+p.age||99)<=23&&!p.loanedOut);
+   if(young.length){const p=young[Math.floor(r*10000)%young.length];p.overall=Math.min(99,(+p.overall||70)+1);p.value=Math.round((+p.value||0)*1.06);state.game.fans=clamp100(state.game.fans+2);addClubEvent(`${p.name} impressiona in allenamento: +1 OVR.`,'info')}
+ }else if(r<.07){state.game.fans=clamp100(state.game.fans+4);addClubEvent('La campagna social del club diventa virale: entusiasmo tra i tifosi.','info')}
+ else if(r<.10){state.game.board=clamp100(state.game.board+3);addClubEvent('La dirigenza apprezza la gestione della settimana.','info')}
+ else if(r<.13){state.game.board=clamp100(state.game.board-2);state.game.fans=clamp100(state.game.fans-2);addClubEvent('Settimana tesa: aumentano le pressioni attorno alla squadra.','loss')}
+ if(state.league.completed){
+   const rank=rankOfUser(),target=seasonTargetRank();
+   if(rank<=4)unlockAchievement('top4','Qualificazione Champions',50);
+   if(rank===1)unlockAchievement('champion','Campione d’Italia',100);
+   state.game.board=clamp100(state.game.board+(rank<=target?10:-8));state.game.fans=clamp100(state.game.fans+(rank<=target?8:-6));
+ }
+}
 
 // ---------- Simulazione campionato ----------
 function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 function shuffleSeeded(arr,seed){const r=mulberry32(seed>>>0),a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function makeSchedule(ids,seed){let a=shuffleSeeded(ids,seed),rounds=[];const n=a.length;for(let r=0;r<n-1;r++){let games=[];for(let i=0;i<n/2;i++){let h=a[i],aw=a[n-1-i];if((r+i)%2){[h,aw]=[aw,h]}games.push({home:h,away:aw,played:false,hg:null,ag:null})}rounds.push(games);a=[a[0],a[n-1],...a.slice(1,n-1)]}const second=rounds.map(g=>g.map(m=>({home:m.away,away:m.home,played:false,hg:null,ag:null})));return [...rounds,...second]}
 function freshTable(){const t={};CLUB_IDS.forEach(id=>t[id]={p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0});return t}
-function newLeague(){if(!state.realClubId)return say('Prima carica una squadra reale');if(state.league&&state.league.currentRound>0&&!confirm('Creare un nuovo campionato e perdere i risultati attuali?'))return;const seed=Date.now()%2147483647;state.league={seed,currentRound:0,schedule:makeSchedule(CLUB_IDS,seed),table:freshTable(),completed:false,economicApplied:false,userStrength:CLUBS[state.realClubId].strength};save();renderLeague();say('Nuovo campionato creato')}
+function newLeague(){if(!state.realClubId)return say('Prima carica una squadra reale');if(state.league&&state.league.currentRound>0&&!confirm('Creare un nuovo campionato e perdere i risultati attuali?'))return;const seed=Date.now()%2147483647;state.league={seed,currentRound:0,schedule:makeSchedule(CLUB_IDS,seed),table:freshTable(),completed:false,economicApplied:false,userStrength:squadOverall()};addClubEvent(`Inizia un nuovo campionato: obiettivo top ${seasonTargetRank()}.`,'info');save();render();say('Nuovo campionato creato')}
 function resetLeague(){if(!state.league)return;if(!confirm('Azzerare completamente il campionato simulato?'))return;state.league=null;save();renderLeague()}
 function teamStrength(cid){if(cid===state.realClubId&&state.league)return Math.max(50,Math.min(99,+state.league.userStrength||CLUBS[cid].strength));return CLUBS[cid].strength}
 function poisson(lambda,rand){let L=Math.exp(-lambda),p=1,k=0;do{k++;p*=rand()}while(p>L&&k<10);return k-1}
 function simulateMatch(m,rand){const hs=teamStrength(m.home),as=teamStrength(m.away);let hx=1.48+(hs-as)*.035+.18,ax=1.18+(as-hs)*.035;hx=Math.max(.25,Math.min(3.6,hx));ax=Math.max(.2,Math.min(3.3,ax));m.hg=poisson(hx,rand);m.ag=poisson(ax,rand);m.played=true;const ht=state.league.table[m.home],at=state.league.table[m.away];ht.p++;at.p++;ht.gf+=m.hg;ht.ga+=m.ag;at.gf+=m.ag;at.ga+=m.hg;if(m.hg>m.ag){ht.w++;at.l++;ht.pts+=3}else if(m.hg<m.ag){at.w++;ht.l++;at.pts+=3}else{ht.d++;at.d++;ht.pts++;at.pts++}}
-function simulateRound(){if(!state.league)return newLeague();if(state.league.completed)return say('Campionato già concluso');const r=state.league.currentRound,rand=mulberry32((state.league.seed+r*7919)>>>0);state.league.schedule[r].forEach(m=>{if(!m.played)simulateMatch(m,rand)});state.league.currentRound++;if(state.league.currentRound>=state.league.schedule.length)state.league.completed=true;save();renderLeague()}
+function simulateRound(){if(!state.league)return newLeague();if(state.league.completed)return say('Campionato già concluso');const r=state.league.currentRound,rand=mulberry32((state.league.seed+r*7919)>>>0);state.league.schedule[r].forEach(m=>{if(!m.played)simulateMatch(m,rand)});state.league.currentRound++;if(state.league.currentRound>=state.league.schedule.length)state.league.completed=true;processGameRound(r);save();render();}
 function simulateFive(){if(!state.league)return newLeague();for(let i=0;i<5&&!state.league.completed;i++)simulateRound()}
 function simulateAll(){if(!state.league)return newLeague();if(!confirm('Simulare tutte le giornate rimanenti?'))return;while(!state.league.completed)simulateRound()}
 function sortedStandings(){if(!state.league)return[];return CLUB_IDS.map(id=>({id,...state.league.table[id]})).sort((a,b)=>b.pts-a.pts||((b.gf-b.ga)-(a.gf-a.ga))||b.gf-a.gf||CLUBS[b.id].strength-CLUBS[a.id].strength)}
 function rankOfUser(){const s=sortedStandings();return s.findIndex(x=>x.id===state.realClubId)+1}
 function leaguePrize(rank){const arr=[35000000,30000000,27000000,25000000,20000000,18000000,15000000,13000000,12000000,11000000,10000000,9500000,9000000,8500000,8000000,7000000,6500000,6000000,5500000,5000000];return arr[Math.max(0,Math.min(19,rank-1))]}
 function europeEstimate(rank){if(rank<=4)return 35000000;if(rank<=6)return 15000000;if(rank===7)return 8000000;return 0}
-function applyLeagueEconomics(){if(!state.league||!state.league.completed)return say('Completa prima il campionato');if(state.league.economicApplied)return say('Effetti già applicati');const r=rankOfUser(),p=leaguePrize(r),e=europeEstimate(r),tot=p+e;state.revenues.otherRev=(+state.revenues.otherRev||0)+p;state.revenues.uefa=(+state.revenues.uefa||0)+e;state.finance.cash=(+state.finance.cash||0)+tot;state.league.economicApplied=true;save();initInputs();render();renderLeague();say('Effetti economici applicati')}
+function applyLeagueEconomics(){if(!state.league||!state.league.completed)return say('Completa prima il campionato');if(state.league.economicApplied)return say('Effetti già applicati');const r=rankOfUser(),p=leaguePrize(r),e=europeEstimate(r),tot=p+e;state.revenues.otherRev=(+state.revenues.otherRev||0)+p;state.revenues.uefa=(+state.revenues.uefa||0)+e;state.finance.cash=(+state.finance.cash||0)+tot;state.league.economicApplied=true;save();initInputs();['buyPrice','buyYears','buyWage','buyOverall','buyMarketValue','buyAge','buyPlayerText','buyClubText'].forEach(x=>{if($(x))$(x).addEventListener('input',previewBuyPlayer)});['editCost','editYears','editDone','editBook','editWage','editWageShare'].forEach(x=>{if($(x))$(x).addEventListener('input',updateEditPreview)});render();renderLeague();say('Effetti economici applicati')}
+
+function goTab(name){const b=document.querySelector(`.tab[data-t="${name}"]`);if(b)b.click()}
+function financialHealth(c){
+ const cash=+state.finance.cash||0,debt=+state.finance.debt||0,assets=+state.finance.finAssets||0;
+ const netDebt=debt-cash-assets,debtRevenue=c.rev>0?netDebt/c.rev:0,monthly=c.cost>0?c.cost/12:0,cashMonths=monthly>0?cash/monthly:0;
+ const margin=c.rev>0?c.net/c.rev:0,squadCostRatio=c.rev>0?(c.wages+c.amort)/c.rev:0;
+ let score=0;if(c.net>=0)score++;else if(margin<-0.1)score--;
+ if(netDebt<=0)score+=2;else if(debtRevenue<=0.5)score++;else if(debtRevenue>1.5)score-=2;else if(debtRevenue>1)score--;
+ if(cashMonths>=4)score++;else if(cashMonths<1)score--;
+ if(squadCostRatio<=0.7)score++;else if(squadCostRatio>0.9)score--;
+ const level=score>=3?'good':score>=0?'warn':'bad';
+ const title=level==='good'?'Situazione solida':level==='warn'?'Situazione equilibrata':'Situazione sotto pressione';
+ const desc=level==='good'?'Liquidità e indebitamento risultano gestibili rispetto alla dimensione del club.':level==='warn'?'La situazione è gestibile, ma conviene controllare risultato, liquidità e costo della rosa.':'Indebitamento, liquidità o costo della rosa richiedono attenzione.';
+ return{netDebt,debtRevenue,cashMonths,margin,squadCostRatio,level,title,desc};
+}
+function showEditPane(name){
+ document.querySelectorAll('.playerEditTab').forEach(b=>b.classList.toggle('active',b.dataset.editPane===name));
+ document.querySelectorAll('.editPane').forEach(p=>p.classList.remove('active'));
+ const p=$('editPane'+name.charAt(0).toUpperCase()+name.slice(1));if(p)p.classList.add('active');
+}
 function renderLeague(){const box=$('fixtureList'),stand=$('standingsBody'),econ=$('leagueEconomics'),my=$('mySeasonBox');$('leagueClub').value=state.clubName||'Nessun club';if(!state.league){$('leagueStrength').value=state.realClubId?CLUBS[state.realClubId].strength:'';$('leagueRound').value='Non iniziato';$('fixtureTitle').textContent='Prossima giornata';box.innerHTML='<div class="empty">Crea un nuovo campionato per iniziare.</div>';stand.innerHTML='';econ.innerHTML='<div class="empty">Nessuna simulazione attiva.</div>';my.innerHTML='<div class="empty">Carica una squadra reale e crea il campionato.</div>';return}
  $('leagueStrength').value=state.league.userStrength;$('leagueRound').value=state.league.completed?'38 / 38':`${state.league.currentRound+1} / 38`;const showRound=state.league.completed?37:state.league.currentRound;$('fixtureTitle').textContent=state.league.completed?'Risultati 38ª giornata':`Giornata ${showRound+1}`;const games=state.league.schedule[showRound]||[];box.innerHTML=games.map(m=>`<div class="fixture"><div class="home">${CLUBS[m.home].name}</div><div class="score">${m.played?m.hg+' - '+m.ag:'vs'}</div><div>${CLUBS[m.away].name}</div></div>`).join('');
  const s=sortedStandings();stand.innerHTML=s.map((t,i)=>`<tr class="${t.id===state.realClubId?'me':''}"><td>${i+1}</td><td>${CLUBS[t.id].name}</td><td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td><td>${t.gf}</td><td>${t.ga}</td><td>${t.gf-t.ga}</td><td><b>${t.pts}</b></td></tr>`).join('');
  const me=state.league.table[state.realClubId],rank=rankOfUser();my.innerHTML=`<div class="grid2"><div><div class="muted">Posizione attuale</div><div class="rankbox">${rank}°</div></div><div><div class="muted">Punti</div><div class="rankbox">${me.pts}</div></div></div><div class="stats"><div class="stat"><small>Vittorie</small><b>${me.w}</b></div><div class="stat"><small>Pareggi</small><b>${me.d}</b></div><div class="stat"><small>Sconfitte</small><b>${me.l}</b></div><div class="stat"><small>Diff. reti</small><b>${me.gf-me.ga}</b></div></div>`;
  if(state.league.completed){const p=leaguePrize(rank),e=europeEstimate(rank);econ.innerHTML=`<div class="grid3"><div class="kpi"><small>Piazzamento</small><strong>${rank}°</strong></div><div class="kpi"><small>Premio campionato stimato</small><strong>${eur(p)}</strong></div><div class="kpi"><small>Europa stimata</small><strong>${eur(e)}</strong></div></div><div class="btnrow" style="margin-top:12px"><button class="btn ${state.league.economicApplied?'ghost':'good'}" onclick="applyLeagueEconomics()" ${state.league.economicApplied?'disabled':''}>${state.league.economicApplied?'Già applicato al bilancio':'Applica al bilancio'}</button></div>`}else econ.innerHTML='<div class="muted">Completa il campionato per calcolare il premio di simulazione.</div>'}
 
-function closeSeason(){const c=calc(),snap={season:state.season,club:state.clubName,rev:c.rev,cost:c.cost,market:c.market,net:c.net,cash:state.finance.cash,debt:state.finance.debt,leagueRank:state.league&&state.league.completed?rankOfUser():null,date:Date.now()},i=state.history.findIndex(x=>x.season===state.season);if(i>=0){if(!confirm('Stagione già archiviata. Sovrascriverla?'))return;state.history[i]=snap}else state.history.push(snap);save();render();say('Stagione archiviata')}
+function closeSeason(){
+ const c=calc(),evaluation=evaluateFinancialSeason(false),snap={season:state.season,club:state.clubName,rev:c.rev,cost:c.cost,market:c.market,net:c.net,cash:state.finance.cash,debt:state.finance.debt,leagueRank:state.league&&state.league.completed?rankOfUser():null,financialObjectives:evaluation,date:Date.now()},i=state.history.findIndex(x=>x.season===state.season);
+ if(i>=0){if(!confirm('Stagione già archiviata. Sovrascriverla?'))return;state.history[i]=snap}else state.history.push(snap);
+ save();render();say(`Stagione archiviata: ${evaluation.met}/${evaluation.total} obiettivi finanziari`);
+}
 function nextLabel(s){const m=s.match(/(\d{4})\/(\d{2,4})/);if(!m)return s;const y=+m[1]+1;return y+'/'+String((y+1)%100).padStart(2,'0')}
-function nextSeason(){if(!confirm('Avviare la stagione successiva? Ricavi e costi annuali saranno azzerati.'))return;state.season=nextLabel(state.season);state.revenues={tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0};state.costs={playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0};state.market=[];state.league=null;state.squad.forEach(p=>{const annual=playerAmort(p),currentBook=playerBook(p);p.bookValue=Math.max(0,currentBook-annual);p.done=Math.min(p.years,(+p.done||0)+1);if(p.age)p.age++});save();initInputs();render();say('Nuova stagione avviata')}
+function nextSeason(){if(!confirm('Avviare la stagione successiva? Ricavi e costi annuali saranno azzerati; gli obblighi di riscatto verranno eseguiti automaticamente.'))return;evaluateFinancialSeason(false);state.squad.forEach(p=>{if(p.onLoanIn&&!p.owned)return;const annual=playerAmort(p),currentBook=playerBook(p);if((p.bookMode||'auto')==='manual')p.bookValue=Math.max(0,currentBook-annual);else p.bookValue=null;p.done=Math.min(p.years,(+p.done||0)+1);if(p.age)p.age++});state.season=nextLabel(state.season);state.revenues={tv:0,sponsor:0,stadium:0,uefa:0,merch:0,otherRev:0};state.costs={playerPayroll:0,playerAmort:0,staff:0,facilities:0,agents:0,admin:0,otherCosts:0,interest:0};state.league=null;settleLoansForNewSeason();state.game.board=clamp100((state.game.board+70)/2);state.game.fans=clamp100((state.game.fans+70)/2);prepareNextSeasonFinancialTargets();addClubEvent(`Inizia la stagione ${state.season}.`,'info');save();initInputs();['buyPrice','buyYears','buyWage','buyOverall','buyMarketValue','buyAge','buyPlayerText','buyClubText'].forEach(x=>{if($(x))$(x).addEventListener('input',previewBuyPlayer)});['editCost','editYears','editDone','editBook','editWage','editWageShare'].forEach(x=>{if($(x))$(x).addEventListener('input',updateEditPreview)});render();say('Nuova stagione avviata')}
 
-function openSaves(){drawSaves();$('saveModal').style.display='block'}function closeSaves(){$('saveModal').style.display='none'}function newSave(){const name=$('newSaveName').value.trim()||'Nuova carriera',nid='s'+Date.now(),a=allSaves();a[nid]=blank(name);putAll(a);localStorage.setItem(AK,nid);location.reload()}function loadSave(nid){localStorage.setItem(AK,nid);location.reload()}function delSave(nid){const a=allSaves();if(Object.keys(a).length<=1)return say('Serve almeno un salvataggio');if(!confirm('Eliminare definitivamente questo salvataggio?'))return;delete a[nid];putAll(a);if(nid===id){localStorage.setItem(AK,Object.keys(a)[0]);location.reload()}else drawSaves()}function dupSave(nid){const a=allSaves(),nid2='s'+Date.now();a[nid2]=JSON.parse(JSON.stringify(a[nid]));a[nid2].meta.name+=' - copia';a[nid2].meta.created=Date.now();putAll(a);drawSaves();say('Duplicato')}
-function drawSaves(){$('saveList').innerHTML='';Object.entries(allSaves()).sort((a,b)=>(b[1].meta.updated||0)-(a[1].meta.updated||0)).forEach(([sid,s])=>{$('saveList').innerHTML+=`<div class="saveitem"><div><b>${s.meta.name}</b><div class="muted">${s.clubName||'Club non impostato'} · ${s.season}<br>${new Date(s.meta.updated||Date.now()).toLocaleString('it-IT')}</div></div><div class="btnrow"><button class="btn primary" onclick="loadSave('${sid}')">${sid===id?'Attivo':'Carica'}</button><button class="btn ghost" onclick="dupSave('${sid}')">Duplica</button><button class="btn danger" onclick="delSave('${sid}')">Elimina</button></div></div>`})}
-function exportSave(){const blob=new Blob([JSON.stringify({version:6,state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(state.meta.name||'salvataggio').replace(/[^a-z0-9_-]+/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href)}
-$('importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result),st=o.state||o;if(!st.squad||!st.revenues)throw 0;st.meta=st.meta||{name:'Importato',created:Date.now(),updated:Date.now()};const nid='s'+Date.now(),a=allSaves();a[nid]=st;putAll(a);localStorage.setItem(AK,nid);location.reload()}catch{say('Backup non valido')}};r.readAsText(f)};
+function openSaves(){drawSaves();$('saveModal').style.display='block'}
+function closeSaves(){$('saveModal').style.display='none'}
+function manualSave(){
+ const ok=save();if($('saveModalStatus'))$('saveModalStatus').textContent=ok?'Salvato alle '+new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}):'Errore nel salvataggio';
+ drawSaves();say(ok?'Carriera salvata':'Errore salvataggio');
+}
+function switchSave(nid){
+ if(nid===id){closeSaves();return}
+ save();const a=allSaves();if(!a[nid])return say('Salvataggio non trovato');
+ id=nid;localStorage.setItem(AK,id);state=JSON.parse(JSON.stringify(a[nid]));ensureState();saves=a;
+ initInputs();render();closeSaves();say('Carriera caricata');
+}
+function newSave(){
+ save();const name=$('newSaveName').value.trim()||'Nuova carriera',nid='s'+Date.now()+'_'+Math.floor(Math.random()*10000),a=allSaves();
+ a[nid]=blank(name);putAll(a);id=nid;localStorage.setItem(AK,id);state=JSON.parse(JSON.stringify(a[nid]));ensureState();saves=a;
+ $('newSaveName').value='';initInputs();render();drawSaves();closeSaves();say('Nuova carriera creata');
+}
+function loadSave(nid){switchSave(nid)}
+function renameSave(nid){
+ const a=allSaves(),s=a[nid];if(!s)return;const name=prompt('Nuovo nome della carriera:',s.meta?.name||'Carriera');if(name===null||!name.trim())return;
+ s.meta=s.meta||{};s.meta.name=name.trim();s.meta.updated=Date.now();putAll(a);
+ if(nid===id){state.meta.name=name.trim();if($('saveName'))$('saveName').value=name.trim();save()}
+ drawSaves();say('Carriera rinominata');
+}
+function delSave(nid){
+ save();let a=allSaves();if(Object.keys(a).length<=1)return say('Deve restare almeno una carriera');if(!confirm('Eliminare definitivamente questa carriera?'))return;
+ delete a[nid];putAll(a);
+ if(nid===id){id=Object.keys(a)[0];localStorage.setItem(AK,id);state=JSON.parse(JSON.stringify(a[id]));ensureState();saves=a;initInputs();render()}
+ drawSaves();say('Carriera eliminata');
+}
+function dupSave(nid){
+ save();const a=allSaves(),src=a[nid];if(!src)return;const nid2='s'+Date.now()+'_'+Math.floor(Math.random()*10000);
+ a[nid2]=JSON.parse(JSON.stringify(src));a[nid2].meta=a[nid2].meta||{};a[nid2].meta.name=(a[nid2].meta.name||'Carriera')+' - copia';a[nid2].meta.created=Date.now();a[nid2].meta.updated=Date.now();putAll(a);drawSaves();say('Carriera duplicata');
+}
+function drawSaves(){
+ const list=$('saveList');if(!list)return;list.innerHTML='';
+ const entries=Object.entries(allSaves()).sort((a,b)=>((b[1].meta||{}).updated||0)-((a[1].meta||{}).updated||0));
+ entries.forEach(([sid,s])=>{
+   const meta=s.meta||{},activeNow=sid===id,updated=meta.updated?new Date(meta.updated).toLocaleString('it-IT'):'Mai';
+   list.innerHTML+=`<div class="saveitem ${activeNow?'saveActive':''}"><div><b>${meta.name||'Carriera'}</b>${activeNow?'<span class="saveBadge">ATTIVA</span>':''}<div class="muted">${s.clubName||'Club non impostato'} · ${s.season||'2026/27'}<br>Ultimo salvataggio: ${updated}</div></div><div class="btnrow">${activeNow?'<button class="btn good" onclick="manualSave()">Salva</button>':`<button class="btn primary" onclick="loadSave('${sid}')">Apri</button>`}<button class="btn ghost" onclick="renameSave('${sid}')">Rinomina</button><button class="btn ghost" onclick="dupSave('${sid}')">Duplica</button><button class="btn danger" onclick="delSave('${sid}')">Elimina</button></div></div>`;
+ });
+}
 
-function render(){const c=calc();$('clubBadge').textContent=state.clubName||'Nuovo club';$('seasonBadge').textContent=state.season;$('kRev').textContent=eur(c.rev);$('kCost').textContent=eur(c.cost);$('kMarket').textContent=eur(c.market);$('kMarket').className=c.market>=0?'plus':'minus';$('kNet').textContent=eur(c.net);$('kNet').className=c.net>=0?'plus':'minus';$('kWage').textContent=eur(c.wages);$('kAmort').textContent=eur(c.amort);$('kCash').textContent=eur(state.finance.cash);$('kDebt').textContent=eur(state.finance.debt);$('income').innerHTML=`<tr><td>Ricavi operativi</td><td>${eur(c.rev)}</td></tr><tr><td>Costi operativi</td><td>-${eur(c.fixed)}</td></tr><tr><td>Stipendi rosa</td><td>-${eur(c.wages)}</td></tr><tr><td>Ammortamenti cartellini</td><td>-${eur(c.amort)}</td></tr><tr><td>Plus/minusvalenze e prestiti</td><td class="${c.market>=0?'plus':'minus'}">${eur(c.market)}</td></tr><tr><td><b>Risultato netto</b></td><td class="${c.net>=0?'plus':'minus'}"><b>${eur(c.net)}</b></td></tr>`;
- if(state.realClubId&&CLUBS[state.realClubId]){const rc=CLUBS[state.realClubId];$('realProfileCard').style.display='block';$('profileMarket').textContent=eur(state.clubProfile?.market??rc.market);$('profilePlayers').textContent=rc.players;$('profileAge').textContent=rc.age.toFixed(1);$('profileStrength').textContent=state.league?state.league.userStrength:(state.clubProfile?.strength??rc.strength);$('profileSource').textContent=`Dati sportivi al 18/08/2026 · ${rc.name} · rosa giocatori: selezione aggiornata` ;if(rc.debt!==null){$('profileFinanceNote').innerHTML=`Cassa precaricata: <b>${eur(rc.cash)}</b> · Debiti finanziari precaricati: <b>${eur(rc.debt)}</b>. Dati finanziari da bilanci 2024/25.`}else{$('profileFinanceNote').textContent=rc.financeNote||'Dati finanziari non precaricati.'}}else $('realProfileCard').style.display='none';
- $('squadList').innerHTML=state.squad.length?'':'<div class="empty">Nessun giocatore dettagliato. Puoi usare le voci aggregate nei Costi oppure inserire i giocatori uno per uno.</div>';state.squad.forEach(p=>{const annual=playerAmort(p),book=playerBook(p);$('squadList').innerHTML+=`<div class="item"><div class="itemhead"><div><div class="name">${p.name} ${p.realSeed?'<span class="realTag">ROSA REALE</span>':''}</div><div class="muted">${p.role}${p.age?' · '+p.age+' anni':''}${p.expiry?' · scad. '+p.expiry:''}</div></div><div class="btnrow"><button class="btn primary" onclick="editP(${p.id})">Modifica</button><button class="btn ghost" onclick="renew(${p.id})">Rinnova</button><button class="btn danger" onclick="removeP(${p.id})">Rimuovi</button></div></div><div class="stats"><div class="stat"><small>Cartellino</small><b>${eur(p.cost)}</b></div><div class="stat"><small>Stipendio</small><b>${eur(p.wage)}</b></div><div class="stat"><small>Ammortamento</small><b>${eur(annual)}</b></div><div class="stat"><small>Valore residuo a bilancio</small><b>${eur(book)}</b></div><div class="stat"><small>Valore mercato</small><b>${eur(p.value)}</b></div><div class="stat"><small>Ammortizzato</small><b>${p.done}/${p.years} anni</b></div></div></div>`});const opts=state.squad.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');$('salePlayer').innerHTML=$('loanPlayer').innerHTML=opts||'<option value="">Nessun giocatore</option>';$('marketList').innerHTML=state.market.length?'':'<div class="empty">Nessuna operazione.</div>';[...state.market].reverse().forEach(m=>$('marketList').innerHTML+=`<div class="item"><div class="name">${m.player}</div><div class="muted">${m.type}${m.from?' da '+m.from:''} · ${m.season}</div><div class="stats"><div class="stat"><small>Importo</small><b>${eur(m.amount)}</b></div><div class="stat"><small>Valore contabile</small><b>${eur(m.book)}</b></div><div class="stat"><small>Effetto economico</small><b class="${m.pl>=0?'plus':'minus'}">${eur(m.pl)}</b></div></div></div>`);$('fLiquid').textContent=eur((+state.finance.cash||0)+(+state.finance.finAssets||0));$('fNetDebt').textContent=eur(c.netDebt);$('fNetDebt').className=c.netDebt<=0?'plus':'minus';$('fEquity').textContent=eur((+state.finance.equity||0)+c.net);$('fSquad').textContent=eur(c.book);$('historyList').innerHTML=state.history.length?'':'<div class="empty">Nessuna stagione archiviata.</div>';[...state.history].reverse().forEach(h=>$('historyList').innerHTML+=`<div class="item"><div class="itemhead"><div><div class="name">${h.season}</div><div class="muted">${h.club||state.clubName}${h.leagueRank?' · '+h.leagueRank+'° in campionato':''}</div></div><b class="${h.net>=0?'plus':'minus'}">${eur(h.net)}</b></div><div class="stats"><div class="stat"><small>Ricavi</small><b>${eur(h.rev)}</b></div><div class="stat"><small>Costi</small><b>${eur(h.cost)}</b></div><div class="stat"><small>Mercato</small><b>${eur(h.market)}</b></div><div class="stat"><small>Cassa</small><b>${eur(h.cash)}</b></div></div></div>`);renderLeague()}
+function render(){
+ const c=calc(),fh=financialHealth(c);
 
-initInputs();render();
+ $('clubBadge').textContent=state.clubName||'Nuovo club';$('seasonBadge').textContent=state.season;
+ $('kRev').textContent=eur(c.rev);$('kCost').textContent=eur(c.cost);$('kMarket').textContent=eur(c.market);$('kMarket').className=c.market>=0?'plus':'minus';
+ $('kNet').textContent=eur(c.net);$('kNet').className=c.net>=0?'plus':'minus';$('kWage').textContent=eur(c.wages);$('kAmort').textContent=eur(c.amort);
+ $('kCash').textContent=eur(state.finance.cash);$('kDebt').textContent=eur(state.finance.debt);
+ $('heroNet').textContent=eur(c.net);$('heroNet').className='heroValue '+(c.net>=0?'plus':'minus');
+ $('heroHealth').textContent=fh.title;$('heroHealth').className='healthBadge health-'+fh.level;
+ $('heroFinanceText').textContent=fh.title;$('heroFinanceDesc').textContent=fh.desc;
+
+ const incomeHTML=`<tr><td>Ricavi operativi</td><td>${eur(c.rev)}</td></tr><tr><td>Costi operativi</td><td>-${eur(c.fixed)}</td></tr><tr><td>Stipendi rosa</td><td>-${eur(c.wages)}</td></tr><tr><td>Ammortamenti cartellini</td><td>-${eur(c.amort)}</td></tr><tr><td>Mercato</td><td class="${c.market>=0?'plus':'minus'}">${eur(c.market)}</td></tr><tr><td><b>Risultato netto</b></td><td class="${c.net>=0?'plus':'minus'}"><b>${eur(c.net)}</b></td></tr>`;
+ $('income').innerHTML=incomeHTML;if($('budgetIncome'))$('budgetIncome').innerHTML=incomeHTML;
+
+ if(state.realClubId&&CLUBS[state.realClubId]){
+   const rc=CLUBS[state.realClubId];$('realProfileCard').style.display='block';$('profileMarket').textContent=eur(state.clubProfile?.market??rc.market);$('profilePlayers').textContent=state.squad.length||rc.players;$('profileAge').textContent=rc.age.toFixed(1);$('profileStrength').textContent=state.league?state.league.userStrength:squadOverall();
+   $('profileSource').textContent=`${rc.name} · dati sportivi e rosa modificabile`;
+   if(rc.debt!==null)$('profileFinanceNote').innerHTML=`Cassa precaricata: <b>${eur(rc.cash)}</b> · debiti finanziari precaricati: <b>${eur(rc.debt)}</b>.`;
+   else $('profileFinanceNote').textContent=rc.financeNote||'Dati finanziari non precaricati.';
+ }else $('realProfileCard').style.display='none';
+
+ $('squadList').innerHTML=state.squad.length?'':'<div class="empty">Nessun giocatore inserito.</div>';
+ state.squad.forEach(p=>{
+   const annual=playerAmort(p),book=playerBook(p),wc=playerWageCost(p);
+   $('squadList').innerHTML+=`<div class="item"><div class="itemhead"><div><div class="name">${p.name} ${p.realSeed?'<span class="realTag">DB</span>':''} ${p.costEstimated?'<span class="estimateTag">STIMA</span>':''} ${p.onLoanIn&&!p.owned?'<span class="loanTag">PRESTITO IN</span>':''} ${p.loanedOut?'<span class="loanTag">PRESTITO OUT</span>':''}</div><div class="muted">${p.role}${p.age?' · '+p.age+' anni':''}${p.expiry?' · scad. '+p.expiry:''}</div></div><div class="btnrow"><span class="ovr">OVR ${p.overall||overallFromValue(p.value,p.age)}</span><button class="btn primary" onclick="editP(${p.id})">Modifica</button><button class="btn ghost" onclick="renew(${p.id})" ${p.onLoanIn&&!p.owned?'disabled':''}>Rinnova</button><button class="btn danger" onclick="removeP(${p.id})">Rimuovi</button></div></div><div class="stats"><div class="stat" style="cursor:pointer" onclick="editP(${p.id},'accounting')"><small>Costo storico · modifica</small><b>${eur(p.cost)}</b></div><div class="stat"><small>Valore residuo</small><b>${eur(book)}</b><div class="muted">${(p.bookMode||'auto')==='auto'?'automatico':'manuale'}</div></div><div class="stat"><small>Ammortamento annuo</small><b>${eur(annual)}</b></div><div class="stat"><small>Stipendio a tuo carico</small><b>${eur(wc)}</b></div><div class="stat"><small>Valore mercato</small><b>${eur(p.value)}</b></div><div class="stat"><small>Ammortamento</small><b>${p.done||0}/${p.years||0} anni</b></div></div></div>`;
+ });
+
+ const opts=state.squad.filter(p=>!p.loanedOut).map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+ $('salePlayer').innerHTML=opts||'<option value="">Nessun giocatore</option>';
+
+ $('marketList').innerHTML=state.market.length?'':'<div class="empty">Nessuna operazione.</div>';
+ [...state.market].reverse().forEach(m=>{
+   const bi=m.balanceImpact!==undefined?m.balanceImpact:m.pl||0,ci=m.cashImpact!==undefined?m.cashImpact:(m.type==='Cessione'?m.amount:0),pending=m.status==='pending'&&m.clause&&m.clause!=='none';
+   $('marketList').innerHTML+=`<div class="item"><div class="itemhead"><div><div class="name">${m.player}</div><div class="muted">${m.type}${m.from?' da '+m.from:''}${m.to?' → '+m.to:''}${m.country?' · '+m.country:''} · ${m.season}${m.clause&&m.clause!=='none'?' · '+(m.clause==='option'?'diritto':'obbligo')+' '+eur(m.buyout):''}</div></div>${pending?`<button class="btn good" onclick="exerciseLoan(${m.id})">${m.clause==='option'?'Esercita riscatto':'Esegui obbligo'}</button>`:''}</div><div class="stats"><div class="stat"><small>Importo</small><b>${eur(m.amount)}</b></div><div class="stat"><small>Impatto a bilancio</small><b class="${bi>=0?'plus':'minus'}">${eur(bi)}</b></div><div class="stat"><small>Impatto cassa</small><b class="${ci>=0?'plus':'minus'}">${eur(ci)}</b></div><div class="stat"><small>Plus/minusvalenza</small><b class="${(m.pl||0)>=0?'plus':'minus'}">${eur(m.pl||0)}</b></div></div></div>`;
+ });
+
+ $('fLiquid').textContent=eur((+state.finance.cash||0)+(+state.finance.finAssets||0));
+ $('fNetDebt').textContent=eur(c.netDebt);$('fNetDebt').className='value '+(c.netDebt<=0?'plus':'minus');
+ $('fEquity').textContent=eur((+state.finance.equity||0)+c.net);$('fSquad').textContent=eur(c.book);
+ $('fCashMonths').textContent=fh.cashMonths.toFixed(1)+' mesi';
+ $('fDebtRevenue').textContent=(fh.debtRevenue*100).toFixed(0)+'%';$('fDebtRevenue').className='value '+(fh.debtRevenue<=0.5?'plus':fh.debtRevenue<=1?'yellow':'minus');
+ $('fMargin').textContent=(fh.margin*100).toFixed(1)+'%';$('fMargin').className=fh.margin>=0?'plus':'minus';
+ $('fSquadCostRatio').textContent=(fh.squadCostRatio*100).toFixed(1)+'%';$('fSquadCostRatio').className=fh.squadCostRatio<=0.7?'plus':fh.squadCostRatio<=0.9?'yellow':'minus';
+ $('financeOverallBadge').textContent=fh.title;$('financeOverallBadge').className='healthBadge health-'+fh.level;
+ $('fNetDebtDesc').textContent=fh.netDebt<=0?'La liquidità e i crediti superano i debiti finanziari.':'Debito residuo dopo aver sottratto cassa e crediti finanziari.';
+ $('financeSummary').innerHTML=`<b>${fh.title}</b><br>${fh.desc}<br><br>PFN: <b>${eur(fh.netDebt)}</b> · PFN/Ricavi: <b>${(fh.debtRevenue*100).toFixed(0)}%</b> · Copertura cassa: <b>${fh.cashMonths.toFixed(1)} mesi</b> · Costo rosa/Ricavi: <b>${(fh.squadCostRatio*100).toFixed(1)}%</b>.`;
+
+ $('historyList').innerHTML=state.history.length?'':'<div class="empty">Nessuna stagione archiviata.</div>';
+ [...state.history].reverse().forEach(h=>$('historyList').innerHTML+=`<div class="item"><div class="itemhead"><div><div class="name">${h.season}</div><div class="muted">${h.club||state.clubName}${h.leagueRank?' · '+h.leagueRank+'° in campionato':''}</div></div><b class="${h.net>=0?'plus':'minus'}">${eur(h.net)}</b></div><div class="stats"><div class="stat"><small>Ricavi</small><b>${eur(h.rev)}</b></div><div class="stat"><small>Costi</small><b>${eur(h.cost)}</b></div><div class="stat"><small>Mercato</small><b>${eur(h.market)}</b></div><div class="stat"><small>Cassa</small><b>${eur(h.cash)}</b></div>${h.financialObjectives?`<div class="stat"><small>Obiettivi finanziari</small><b>${h.financialObjectives.met}/${h.financialObjectives.total}</b></div>`:''}</div></div>`);
+
+ renderManagerGame();renderLeague();refreshMoneyFormatting();
+}
+
+initInputs();['buyPrice','buyYears','buyWage','buyOverall','buyMarketValue','buyAge','buyPlayerText','buyClubText'].forEach(x=>{if($(x))$(x).addEventListener('input',previewBuyPlayer)});['editCost','editYears','editDone','editBook','editWage','editWageShare'].forEach(x=>{if($(x))$(x).addEventListener('input',updateEditPreview)});render();
 </script>
 </body>
 </html>
